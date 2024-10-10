@@ -230,10 +230,10 @@
         let ctx = canvas.getContext('2d');//El dibuix ha de ser 2D i no 3D
 
         // Definir x1, y1, x2, y2
-        let x1 = 50;  // por ejemplo
-        let y1 = 50;
-        let x2 = 200;
-        let y2 = 200;
+        let x1 = a1 * Math.cos(q1);
+        let x2 = a2 * Math.cos(q1 + q2);
+        let y1 = a1 * Math.sin(q1);
+        let y2 = a2 * Math.sin(q1 + q2);
 
         ctx.moveTo(x1, y1); 
         ctx.lineTo(x2, y2);
