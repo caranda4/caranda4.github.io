@@ -217,6 +217,7 @@
 
         // Dibuixar graficament el robot amb els dos braços
         let anvas = document.getElementById("robotCanvas");
+        window.onload = function() {
          /*Canvas és semblant a img que servia per introduir una imatge perquè no té els atributs o paràmetres src que 
            indica la font (source=src=nom de la imatge) o la direcció d'internet de la imatge i tampoc té el paràmetre alt,
            que s'hauria de posar en totes les imatges, per exemple, alt="aquest text nomes sortirà si no es troba la imatge
@@ -271,7 +272,7 @@
         ctx.moveTo(centerX, centerY); //Ara posem que comenci al primer braç perquè és l'inici del segon braç
         ctx.lineTo(x2_screen, y2_screen); //Ara la linia de pot anar a x1_screen, y1_screen (surt d'aqui), aixi que posem que vagi cap a x2_screen, y2_screen que es el final del segon braç
         ctx.strokeStyle='#ffdca4'
-        ctx.lineWidth="5"
+        ctx.lineWidth="5"}
 
 
 
