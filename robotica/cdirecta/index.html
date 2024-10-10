@@ -159,7 +159,6 @@
             <!--en comptes de fer un clic al botó puc fer ondblclick que obligaria a l'usuari a fer 2 clics o puc fer onmouseover el botó s'activa quan paso per sobre amb el ratolí i puc fer que canvii de color o una explicació de lo que fa el botó o tooltip o informació del que fa el botó-->
     </div><!-- aquet es el divisor que conte la entrada de dades de l'usuari i el botó calcula la pocició-->
     <div id="output"></div> <br>
-    <div id="robotCanvas" width="400" height="400"></div>
     
             <!-- l'anterior és un divisor buit que es una part de la pantalla que ara està buida, però te un nom, output, anomeat així perqé serà on estaran tots els calculs quan apreten el botó calcula pocició-->
     <canvas id="robotCanvas" width="400" height="400"></canvas>
@@ -217,7 +216,7 @@
         MathJax.typeset();}  // Renderitzar MathJax per mostrar les fórmules correctament
 
         // Dibuixar graficament el robot amb els dos braços
-        let canvas = document.getElementById('robotCanvas');
+        let anvas = document.getElementById("robotCanvas");
          /*Canvas és semblant a img que servia per introduir una imatge perquè no té els atributs o paràmetres src que 
            indica la font (source=src=nom de la imatge) o la direcció d'internet de la imatge i tampoc té el paràmetre alt,
            que s'hauria de posar en totes les imatges, per exemple, alt="aquest text nomes sortirà si no es troba la imatge
@@ -229,6 +228,8 @@
          robotCanvas on sortira el dibuix del robot.*/
         let ctx = canvas.getContext('2d');//El dibuix ha de ser 2D i no 3D
         ctx.clearRect(0,0, canvas.width, canvas.height);
+        
+
         //Netejem el canvas abans de dibuixar
         //ctx l'hem anomenat aixi perque significa context de canvas en 2D
         /* Posem el punt davant de .clearRect perquè és un mètode que s'aplica 
