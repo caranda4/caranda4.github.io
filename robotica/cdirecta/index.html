@@ -258,8 +258,23 @@
         ctx.moveTo(centerX, centerY);
         // Estic avisant que es moguial centre del canvas per començar a dibbuixar des del centre del canvas
         ctx.lineTo(x1_screen, y1_screen);
-        //Aixó vol dir dibuixa una línia des de el centre del canvas, que és l'inici del primer braç fin a la pocició x1_screen i y1_screen
-    
+        //Aixó vol dir dibuixa una línia des de el centre del canvas, que és l'inici del primer braç fin a la pocició x1_screen i y1_screen que és el final del primer braç
+        ctx.strokeStyle='ff8065';
+        //strokeStyle indica el color de la linia en aquet cas el blau per el pimer braç
+        ctx.lineWidth="5"
+        //lineWidth és l'amplada de la linia en pixels, en aquest cas 5px de gruix
+        ctx.stroke()
+        //stroke és una funció, se que és una funció perquè té doble parèntesis i dintre dels parèntesis no hi ha parametres, amb aquesta funció aconseguimdibuixar dibuixar la linia al canvas
+        //a partir d'aqui dibuixem el segon braç i el vull verd amb 5px de gruix
+        ctx.beginPath(); //Com té  2 parentesis també es una funció
+        ctx.moveTo(centerX, centerY); //Ara posem que comenci al primer braç perquè és l'inici del segon braç
+        ctx.lineTo(x2_screen, y2_screen); //Ara la linia de pot anar a x1_screen, y1_screen (surt d'aqui), aixi que posem que vagi cap a x2_screen, y2_screen que es el final del segon braç
+        ctx.strokeStyle='#ffdca4'
+        ctx.lineWidth="5"
+
+
+
+        
     </script>
 
 </div>
