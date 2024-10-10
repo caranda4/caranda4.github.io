@@ -218,7 +218,7 @@
         // Dibuixar graficament el robot amb els dos braços
         window.onload = function() {
         let canvas = document.getElementById("robotCanvas");
-                 /*Canvas és semblant a img que servia per introduir una imatge perquè no té els atributs o paràmetres src que 
+            /*Canvas és semblant a img que servia per introduir una imatge perquè no té els atributs o paràmetres src que 
            indica la font (source=src=nom de la imatge) o la direcció d'internet de la imatge i tampoc té el paràmetre alt,
            que s'hauria de posar en totes les imatges, per exemple, alt="aquest text nomes sortirà si no es troba la imatge
            o per persones cegues perquè entenguin la imatge". En canvi canvas només té dos atributs width i height, que son
@@ -228,6 +228,16 @@
          es a dir hi ha un divisor buit HTML anomenat output on surten totes les formules i un divisor buit anomenat HTML anomenat 
          robotCanvas on sortira el dibuix del robot.*/
         let ctx = canvas.getContext('2d');//El dibuix ha de ser 2D i no 3D
+
+        // Definir x1, y1, x2, y2
+        let x1 = 50;  // por ejemplo
+        let y1 = 50;
+        let x2 = 200;
+        let y2 = 200;
+
+        ctx.moveTo(x1, y1); 
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
         ctx.clearRect(0,0, canvas.width, canvas.height);
         
 
