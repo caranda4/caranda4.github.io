@@ -7,4 +7,14 @@
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
     </script>
+    <style>
+        body {font-family: Arial, sans-serif;
+               margin: 20px;}
+        .equation {margin: 20px 0;}
+        .results {fontt-weight: bold;}
+        canvas {border: 1px solid black;}
+    </style>
+</head>
+<body>
+
 </html>
