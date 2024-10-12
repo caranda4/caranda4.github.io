@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinemàtica Inversa d'un Robot</title>
     <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
     <style>
         body {font-family: Arial, sans-serif;
-               margin: 20px;}
+              margin: 20px;}
         .equation {margin: 20px 0;}
-        .results {fontt-weight: bold;}
+        .results {font-weight: bold;}
         canvas {border: 1px solid black;}
     </style>
 </head>
 <body>
 
+</body>
 </html>
