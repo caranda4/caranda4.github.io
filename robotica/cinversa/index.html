@@ -32,14 +32,14 @@
         <label for="x">Posició Y:</label>
         <input type="number" id="Y"  value="1.5" step="0.1"><br><br>
 
-        <button onclick="CalculateAngles()">Calcula els angles</button>
+        <button onclick=calculateAngles()">Calcula els angles</button>
     </div>
     
     <div id="output"> </div>
     <canvas id="robotCanvas"width="400" height="400"> </canvas>
 
     <script>
-        function CalculateAngles(){ 
+        function calculateAngles(){ 
             
             //Agafar les dades introduïdes per l'usuari
             let a1 = parseFloat(document.getElementById('a1').value);
