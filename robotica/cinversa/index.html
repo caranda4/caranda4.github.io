@@ -54,7 +54,7 @@
             //Càlcul de q1
             let k1 = a1+a2*Math.cos(q2);
             let k2 = a2*Math.sin(q2);
-            let q1 = Math.atan2(x,y)-Math.atan2(k1,k2);
+            let q1 = Math.atan2(y,x)-Math.atan2(k1,k2);
 
             //Convertir radians a graus
             let q1_deg = q1*180/Math.PI;
@@ -76,7 +76,7 @@
 
             //Visualització gràfica
             let canvas = document.getElementById('robotCanvas');
-            let ctx = canvass.getContext('2d')
+            let ctx = canvas.getContext('2d')
             ctx.clearRect(0,0,canvas.width,canvas.height); //Netejar canvas
 
             //Centre i escales
