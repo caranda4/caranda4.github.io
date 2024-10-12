@@ -21,16 +21,16 @@
     
     <div>
         <label for="a1">Longitud del primer braç(a1):</label>
-        <input type="number" id="a1"  value="2" step="0.1> <br><br>
+        <input type="number" id="a1"  value="2" step="0.1><br><br>
         
         <label for="a2">Longitud del segon braç(a2):</label>
-        <input type="number" id="a2"  value="1.5" step="0.1> <br><br>
+        <input type="number" id="a2"  value="1.5" step="0.1><br><br>
         
         <label for="x">Posició X:</label>
-        <input type="number" id="x"  value="2.5" step="0.1> <br><br>
+        <input type="number" id="x"  value="2.5" step="0.1><br><br>
         
         <label for="x">Posició Y:</label>
-        <input type="number" id="Y"  value="1.5" step="0.1> <br><br>
+        <input type="number" id="Y"  value="1.5" step="0.1> br><br>
 
         <button onclick="CalculateAngles()">Calcula els angles</button>
     </div>
@@ -61,8 +61,13 @@
             let q2_deg = q2*180/Math.PI;
 
             //Resultat
-            let output ="<div class='equation'>Les equacions per calcular els angles són:</div>";
-            output += "<div class='equation'>
+            let output = "<div class='equation'>Les equacions per calcular els angles són:</div>";
+            output += "<div class='equation'>\\[q_2=\\arccos\\left(\\frac{d^2-a_1^2-a_2^2}{2 a_1 a_2}\\right)\\]</div>
+            output += "<div class='equation'>\\[q_1=\\arctan\\left(y,x\\right)-\\arctan\\left(\\frac{a_2\\sin(q_2)}\\right\\]</div>;
+
+            //Substituir les variables
+            output += "<div class='equation'>Substituint els valors:</div>
+            output += "<div class='equation'>\\[d=sqrt
     </script>
     
 </body>
