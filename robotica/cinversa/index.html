@@ -66,8 +66,13 @@
             output += "<div class='equation'>\\[q_1=\\arctan\\left(y,x\\right)-\\arctan\\left(\\frac{a_2\\sin(q_2)}\\right\\]</div>;
 
             //Substituir les variables
-            output += "<div class='equation'>Substituint els valors:</div>
-            output += "<div class='equation'>\\[d=sqrt
+            output += `<div class='equation'>Substituint els valors:</div>`;
+            output += `<div class='equation'>\\[d=\\sqrt{${x}^2+${y}^2}=${d.toFixed(2)}\\]</div>`;
+            output += `<div class='equation'>\\[q_2=\\arccos\\left(\\frac{${d.toFixed(2)}^2-${a1}^2-${a2}^2}{2\\times${a1}\\times${a2}}\\right)=${q2_deg.toFixed(2)}°\\]</div>`;
+            output += `<div class='equation'>\\[q_1=\\arctan\\left(${y},${x}\\right)-\\arctan\\left(\\frac{${a2}\\sin(${q2_deg.toFixed(2)}°)}{${a1}+${a2}\\cos(${q2_deg.toFixed(2)}°)}\\right)=${q1_deg.toFixed(2)}°\\]</div>`;
+
+            document.getElementById('robotCanvas');
+            MathJax.typeset();} //Renderitzar MathJax per mostrar les fórmules correctament  
     </script>
     
 </body>
