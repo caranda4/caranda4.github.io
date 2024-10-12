@@ -16,6 +16,54 @@
     </style>
 </head>
 <body>
+    
+    <h1>Cinemàtica Inversa d'un robot amb dos braços</h1>
+    
+    <div>
+        <label for="a1">Longitud del primer braç(a1):</label>
+        <input type="number" id="a1"  value="2" step="0.1> <br><br>
+        
+        <label for="a2">Longitud del segon braç(a2):</label>
+        <input type="number" id="a2"  value="1.5" step="0.1> <br><br>
+        
+        <label for="x">Posició X:</label>
+        <input type="number" id="x"  value="2.5" step="0.1> <br><br>
+        
+        <label for="x">Posició Y:</label>
+        <input type="number" id="Y"  value="1.5" step="0.1> <br><br>
 
+        <button onclick="CalculateAngles()">Calcula els angles</button>
+    </div>
+    
+    <div id="output"> </div>
+    <canvas id="robotCanvas"width="400" height="400"> </canvas>
+
+    <script>
+        function CalculateAngles(){ 
+            
+            //Agafar les dades introduïdes per l'usuari
+            let a1 = parseFloat(document.getElementById('a1').value);
+            let a2 = parseFloat(document.getElementById('a2').value);
+            let x = parseFloat(document.getElementById('x').value);
+            let y = parseFloat(document.getElementById('y').value);
+
+            //Càlcul de q2
+            let d = Math.sqrt(x*x+y*y)
+            let q2 = Math.acos((d*d-a1*a1-a2*a2)/(2*a1*a2));
+
+            //Càlcul de q1
+            let k1 = a1+a2*Math.cos(q2);
+            let k2 = a2*Math.sin(q2);
+            let q1 = Math.atan2(x,y)-Math.atan2(k1,k2);
+
+            //Convertir radians a graus
+            let q1_deg = q1*180/Math.PI;
+            let q2_deg = q2*180/Math.PI;
+
+            //Resultat
+            let output ="<div class='equation'>Les equacions per calcular els angles són:</div>";
+            output += "<div class='equation'>
+    </script>
+    
 </body>
 </html>
