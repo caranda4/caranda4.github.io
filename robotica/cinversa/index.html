@@ -71,7 +71,7 @@
             output += `<div class='equation'>\\[q_2=\\arccos\\left(\\frac{${d.toFixed(2)}^2-${a1}^2-${a2}^2}{2\\times${a1}\\times${a2}}\\right)=${q2_deg.toFixed(2)}°\\]</div>`;
             output += `<div class='equation'>\\[q_1=\\arctan\\left(${y},${x}\\right)-\\arctan\\left(\\frac{${a2}\\sin(${q2_deg.toFixed(2)}°)}{${a1}+${a2}\\cos(${q2_deg.toFixed(2)}°)}\\right)=${q1_deg.toFixed(2)}°\\]</div>`;
 
-            document.getElementById('robotCanvas');
+            document.getElementById('output').innerHTML = output;
             MathJax.typeset();} //Renderitzar MathJax per mostrar les fórmules correctament  
     </script>
     
