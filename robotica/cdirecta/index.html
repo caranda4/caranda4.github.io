@@ -230,10 +230,10 @@
         let ctx = canvas.getContext('2d');//El dibuix ha de ser 2D i no 3D
 
         // Definir x1, y1, x2, y2
-        let x1 = a1 * Math.cos(q1);
-        let x2 = a2 * Math.cos(q1 + q2);
-        let y1 = a1 * Math.sin(q1);
-        let y2 = a2 * Math.sin(q1 + q2);
+        let x1 = a1 * Math.cos (q1);
+        let x2 = a2 * Math.cos (q1 + q2);
+        let y1 = a1 * Math.sin (q1);
+        let y2 = a2 * Math.sin (q1 + q2);
 
         ctx.moveTo(x1, y1); 
         ctx.lineTo(x2, y2);
@@ -257,10 +257,10 @@
         let scale = 80; // Escala per dibuixar les distancies
         // La escala del dibuix vol dir que si poso una uniat física en la entrada dde text corresponent a a1 o a a2 equival a 80px en el canvas.
         // Per exemple, si el robot té un braç de un metre serien 80px
-        let x1_screen = centerX + x1*scale;
-        let y1_screen = centerY + y1*scale;
-        let x2_screen = centerX + x2*scale;
-        let y2_screen = centerY + y2*scale;
+        let x1_screen = centerX + x1 * scale;
+        let y1_screen = centerY + y1 * scale;
+        let x2_screen = centerX + x2 * scale;
+        let y2_screen = centerY + y2 * scale;
         /*  x1_screen, y1_screen, x2_screen i y2_screen són les coordenades del  robot que comencem pel centre perquè
             el braç del robot es pot moure en qualsevol direcció i el que faig és aplicar l'escala a les distancies dels braços 
             introduides*/
