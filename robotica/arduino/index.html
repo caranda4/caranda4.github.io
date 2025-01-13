@@ -10,8 +10,12 @@
 <p>PWM es representa amb el símbol "~" tal com podem verure en la imatge següent d'un Arduino Uno</p>
 <img src="arduinouno.jpg" widht="600" height="400">
 <p>Més amunt podem veure que els pins números 3, 5, 6, 9, 10 i 11.</p>
-<p>Aquests PWM són sortides analògiques de 8 bits, en el cas de Arduino Uno Rev3 d'acord amb el <a href="https://store.arduino.cc/en-es/products/arduino-uno-rev3">fabricant<a/>, 
-   mentres que en el cas d'arduino Uno Rev4 és de 12 bits segons el <a href="https://docs.arduino.cc/resources/datasheets/ABX00080-datasheet.pdf">fabricant<a/> </p>
+<p>Aquests PWM són sortides analògiques de 8 bits, en el cas de Arduino Uno Rev3 d'acord amb el <a href="https://store.arduino.cc/en-es/products/arduino-uno-rev3">fabricant</a>, 
+   mentres que en el cas d'arduino Uno Rev4 és de 12 bits segons el <a href="https://docs.arduino.cc/resources/datasheets/ABX00080-datasheet.pdf">fabricant</a> que l'anomena DAC, que vol dir Digital Analog Converter</p>
+<p>TEnir 8 o 112 bits en un convertidor digital analògic o DAC tipus PWM fa que tinguem 2<sup>8</sup> o 2<sup>10</sup> nivells de diferents de corrent, es a dir 256 nivells diferents 2048 nivells diferents</p>
+<p>Suposem que tant Arduino Uno Rev3 o Rev4 poden donar 5V com a màxim. Quina seria la resolució en minivolts en cada Ardunio?</p>
+<p>5 volts dividit entre 256 dona 0,01953125 volts=19,53125 minivolts per Arduino Uno Rev3</p>
+<p>5 volts dividit entre 2048 dona 0,00244140625 volts=2,44140625 minivolts per Arduino Uno Rev4</p>
 </body>
 </html>
 
