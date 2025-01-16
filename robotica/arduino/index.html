@@ -7,8 +7,16 @@
         margin: 20px auto; //Marge de 20px a la part superior i centra la taula
       }
       th,td{
-        border: 1px;
-        margin: 20px auto; //Marge de 20px a la part superior i centra la taula}
+        border: 1px solid #ddd; //Afegieix una vora fina d'un píxel de color gris clar al voltant de totes les cel·les th i td.
+        padding: 10px auto; //Espai intern dins de cada cel·la, per fer-la més llegible.
+        text-algin: center // Centrar el text dins de cada cel·la.
+        }
+      thead{
+        background: #f4f4f4; //Cavia el color del fons del thead a gris clar.
+        font-weight: bold; //Fa que la capçelera de la aula estigui en negreta.
+        }
+      tbody tr: nth-child(even){ //És una pseudoclasse aplicada a tr segons si es parell o imparell, even és parell i odd és imparell
+          background-color: #f9f9f9; 
     </style>
   </head>
 <h1>Conceptes generals de microcontroladors</h1>
