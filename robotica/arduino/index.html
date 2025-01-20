@@ -110,6 +110,17 @@
     </tr>
   </tbody>
 </table>
+<pre><code>
+  int valorADC=0; 
+  voild setup(){         //9600 en Arduino
+  Serial.beguin(9600);   //115200 en S3
+  }
+  voild loop(){
+  valorADC=analogRead(A0);  //34 en S3
+  Serial.print(valorADC);
+  delay (500);
+  }
+</code></pre>
 </body>
 </html>
 
