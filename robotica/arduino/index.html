@@ -152,28 +152,30 @@
     <p> Si tenim 12 bits en un ADC (Analog Digital Converter) significa que té 2<sup>12</sup> combinacions de zeros i uns es a dir 4096 nivells diferents que numericament van des del 0 a 4095. 
         Ara justifiquem el número 65536 seria correcte si fos 2<sup>16</sup> com diu el fabricant, pero al datasheet parla d'un nivell màxim de 8000h (Número hexadecimal que correspon a 32768) es a dir, són 15 bits utilitzables. 
         Sempre s'ha de comprobar el  <a href="https://cdn-shop.adafruit.com/datasheets/ads1115.pdf"> datasheet o fulla de caracteristiques del fabricant</a></p>
-  <pre><code>
-                int valorADC=0; // Int significa integer o valor numèric (float serial floating ), serveix per craer una variable amb el nom que volguem, sempre és la primera linia però a vegades ha d'haver una avans carregant les biblioteques.
-                void setup(){ // Serveix per introduir funcions i paràmetres amb què iniciarem el nostre programa i codi que no varia.
-                    Serial.begin(9600); //9600 en Arduino i 115200 en S3 //Seial s'escriu en majuscules ja que és una classe que és una part important del codi Arduuino. El punt és que estem aplicant un mètode, el mètode begin connecta el cable amb l'ordinador per transmetre un parametre en numero enter que correspon a la velocitat en bits/segon. És molt important possar un ; al final de cada instrucció.
+    <pre><code>
+        int valorADC=0; // Int significa integer o valor numèric (float serial floating ), serveix per craer una variable amb el nom que volguem, sempre és la primera linia però a vegades ha d'haver una avans carregant les biblioteques.
+        void setup(){ // Serveix per introduir funcions i paràmetres amb què iniciarem el nostre programa i codi que no varia.
+        Serial.begin(9600); //9600 en Arduino i 115200 en S3 //Seial s'escriu en majuscules ja que és una classe que és una part important del codi Arduuino. El punt és que estem aplicant un mètode, el mètode begin connecta el cable amb l'ordinador per transmetre un parametre en numero enter que correspon a la velocitat en bits/segon. És molt important possar un ; al final de cada instrucció.
+        }
+        void loop(){ // És una funció que es repeteix per sempre fins que desconnector l'aparell o posso un codi per aturar-ho
+        valor_ADC=analogRead(A0); //34 en S3 // La variable que hem creat abans que era 0 inicialment ara canviarà perquè la instucció analogRead el que fa és llegir valors entre 0 i 1023 si és un Arduino uno, A0 és una de les 6 entrades analògiques d'Arduino uno
+        valor_ADC=analogRead(34); // La variable de valor 0 ara estarà entre els valors 0 i 4095 Perquè és un microcontrolador de 12 bits ADC
+            //ADC és Analog Digital converter, és a dir que convertim un valor analògic en digital (convertidor analògic digital)
+            // DAC és Digital Analog Converter, és a dir el contrari que ADC, convertim digital a analògic com el PWM (Pulse Width Modlation) que vol dir modulació de l'ample de banda.
+          // D'acord amb el <a src="https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf"> datasheet o fulla de caracterísitques de ESP32S3 </a> Hi ha 20 entrades analògiques de 12 bits mentres que en Arduino Uno hi ha 6 entrades analògiques de 10 bits
+        Serial.println(valorADC); // Println significa que imprimeixi via serial el valor de ADC (0-1023 o 0-4095)
+        delay(500); //Espera 500 milisegons o mig segons per mostrar el resultat
                 }
-                void loop(){ // És una funció que es repeteix per sempre fins que desconnector l'aparell o posso un codi per aturar-ho
-                    valor_ADC=analogRead(A0); //34 en S3 // La variable que hem creat abans que era 0 inicialment ara canviarà perquè la instucció analogRead el que fa és llegir valors entre 0 i 1023 si és un Arduino uno, A0 és una de les 6 entrades analògiques d'Arduino uno
-                    valor_ADC=analogRead(34); // La variable de valor 0 ara estarà entre els valors 0 i 4095 Perquè és un microcontrolador de 12 bits ADC
-                    //ADC és Analog Digital converter, és a dir que convertim un valor analògic en digital (convertidor analògic digital)
-                    // DAC és Digital Analog Converter, és a dir el contrari que ADC, convertim digital a analògic com el PWM (Pulse Width Modlation) 
-                    que vol dir modulació de l'ample de banda
-                    D'acord amb el <a src="..........."> datasheet o fulla de caracterristiques de ESP32S3</a>
-                    //Hi ha 20 entrades de 12 bits mentre que en Arduino Uno hi ha 6 entrades analogiques de 10 bits
-    
-                    Serial.println(valorADC); // Println significa que imprimeixi via serial el valor de ADC  (0-1023 o 0-4095)
-                    delay(500); //Espera 500 milisegons o mig segon per mostrar el resultat 
-                }
-    </code></pre>
-  <p>Com podem veure a la foto de m´s amun d'arduino a lal cantonado inferior dreta es troben els 6 ADC o entrades analogiques  amb les lletres d'A0 fis a A6, i a la part superior de l'arduino podem veure els pins que son els 6 DACs o sortides analogiques amb les que estan señalades amb ~ (Pins 3,</p>
-  <img src="esp32s3" whi=800 height=600>
-  <p>Podem obserbar que a diferencia de lla gran majoria dede pins son GPI0
-  Si vlem veure un esuqema dles pins podem escriure pinout</p>
+            </code></pre>
+        <p>Com podem veure a la foto de més amint d'arduino a la cantonada inferior dreta es troben els 6 ADCs o entrades analògiques amb les 
+        lletres d'A0 fins a A6, i a la part superior de l'arduino podem veure els pins que son els 6 DACs o sortides analògiques de tipus PWM
+        que estan senyalaeds amb ~ (Pins 3, 5, 6, 9, 10, 11).</p>
+        <p>En la imatge següent podem veure un esquema de ESP32S3</p>
+        <img src="esp32s3.webp" width="800" height="600">
+        <p>Podem observar que a diferèndia d'Arduino Uno la gran majoria de pins son GPIO, que significa General Purpose Input Output, en català 
+        Pin d'Entrada i Sortida de Propòsit General, és a dir, que pot tenir moltes utilitats, entrada digital, sortida digital, entrada analògica, 
+        sortida analògica. Si volem veure un esquema dels pins podem escriure "pinout".</p>
+        <p>Alguns pins són RTC</p>
 
 
 </body>
