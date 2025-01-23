@@ -26,6 +26,41 @@
       background-color: #e2e2e2;
     }
   </style>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+       <a class="navbar-brand d-flex align-items-center" href="#">
+    <img src="logo.png" alt="Logo" width="50" class="logo">
+    <span class="brand-text">Web de Carla</span>
+</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://caranda4.github.io/">Inici</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://caranda4.github.io/robotica/coldplay">Projecte Coldplay</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Braç robótic</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="https://caranda4.github.io/robotica/cdirecta">Cinemàtica directa</a>
+                        <a class="dropdown-item" href="https://caranda4.github.io/robotica/cinversa">Cinemàtica inversa</a>
+                        <a class="dropdown-item" href="#">Projecte 3</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://caranda4.github.io/robotica/arduino/">Arduino</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 </head>
 <h1>Conceptes generals de microcontroladors</h1>
 <p>Esla diferents microcontroladors tenen en commú els següents aspectes:</p>
@@ -117,36 +152,30 @@
     <p> Si tenim 12 bits en un ADC (Analog Digital Converter) significa que té 2<sup>12</sup> combinacions de zeros i uns es a dir 4096 nivells diferents que numericament van des del 0 a 4095. 
         Ara justifiquem el número 65536 seria correcte si fos 2<sup>16</sup> com diu el fabricant, pero al datasheet parla d'un nivell màxim de 8000h (Número hexadecimal que correspon a 32768) es a dir, són 15 bits utilitzables. 
         Sempre s'ha de comprobar el  <a href="https://cdn-shop.adafruit.com/datasheets/ads1115.pdf"> datasheet o fulla de caracteristiques del fabricant</a></p>
-<pre> <code>
-  int valor_ADC=0; // Int significa integer o valor enter numèric (float seria floating point number o decimal, char
-  seria un character o caracter de lletra de l'alfabet, string seria una cadena de caracters o paraula, etc. El més important
-  es entendre que la primera paraula defineix el tipus de variable que tenim, en aquest cas enter). "valor_ADC" és un nom
-  que triem nosaltres per definir una variable, es a dir, un valor que no serà constant i que té inicialment un valor 0,
-  si posem int valor_ADC; es a dir no posem que és = a 0 per defecte hauria de donar valor 0. Si jo volgues posar un potenciometre
-  posaria pot i si volgues posar un LDR posaria ldr. Sempre la primera linia és la definició de les variables. A vegades
-  avanç de la primera linia necessitem carregar biblioteques.
-  void setup(){  // Sempre hi ha un setup o funció de configuració del microcontrolador en llenguatge Arduino que té un 
-  parentesis buit perquè no té cap parametre o argument del qual depengui en molts casos. La paraula void seria l'equivalent
-  a la paraula function en JavaScript. També es diu void setup en Processing perquè deriva de Processing aquest llenguatge.
-  Posem una clau per agrupar totes les instruccions que volem executar una sola vegada, perquè setup s'executa només al principi
-  quan arranquem o encenem l'Arduino o microcontrolador.
-  Serial.begin(9600); // Serial s'escriu amb mayuscules perquè és una classe que és una part important del codi Arduino
-  que antigament era una classe de Processing i té un mètode que es fa servir amb la sintaxi del punt, dot syntax que 
-  consisteix en que quan jo escric un punt estic aplicant un mètode normalment a un objecte de una classe i a vegades a una
-  classe, com aquí. El mètode begin connecta per al cable sèrie l'ordinador amb l'Arduino i té només un parametre que és
-  un número enter que correspon a la velocitat en bits/segon. Pel cas de l'Arduino uno 9600 bits/segon o bauds, mentres
-  que en ESP32S3 són 115200 bits/segon o bauds "Serial.begin(115200);". És molt important posar un ; en cada instrucció 
-  per informar que ja ha acabat.
-  }
-  void loop (){ // És una funció que repeteix sense parar fins que desconecto fisicament o poso un codi per aturar-ho
-  valor_ADC=analogRead(A0); // La variable que hem creat abans que era 0 inicialment ara canviarà perquè la instucció
-  analogRead el que fa és llegir valors entre 0 i 1023 si és un Arduino uno, A0 és una de les 6 entrades analògiques 
-  d'Arduino uno
-  valor_ADC=analogRead(34); // La variable de valor 0 ara serà un valor entre 0 i 4095 perquè 34 és el numero de PIN d'un 
-  ESP32S3
-  Serial-println(valor.ADC)
-  delay(500);
-</code></pre>
+  <pre><code>
+                int valorADC=0; // Int significa integer o valor numèric (float serial floating ), serveix per craer una variable amb el nom que volguem, sempre és la primera linia però a vegades ha d'haver una avans carregant les biblioteques.
+                void setup(){ // Serveix per introduir funcions i paràmetres amb què iniciarem el nostre programa i codi que no varia.
+                    Serial.begin(9600); //9600 en Arduino i 115200 en S3 //Seial s'escriu en majuscules ja que és una classe que és una part important del codi Arduuino. El punt és que estem aplicant un mètode, el mètode begin connecta el cable amb l'ordinador per transmetre un parametre en numero enter que correspon a la velocitat en bits/segon. És molt important possar un ; al final de cada instrucció.
+                }
+                void loop(){ // És una funció que es repeteix per sempre fins que desconnector l'aparell o posso un codi per aturar-ho
+                    valor_ADC=analogRead(A0); //34 en S3 // La variable que hem creat abans que era 0 inicialment ara canviarà perquè la instucció analogRead el que fa és llegir valors entre 0 i 1023 si és un Arduino uno, A0 és una de les 6 entrades analògiques d'Arduino uno
+                    valor_ADC=analogRead(34); // La variable de valor 0 ara estarà entre els valors 0 i 4095 Perquè és un microcontrolador de 12 bits ADC
+                    //ADC és Analog Digital converter, és a dir que convertim un valor analògic en digital (convertidor analògic digital)
+                    // DAC és Digital Analog Converter, és a dir el contrari que ADC, convertim digital a analògic com el PWM (Pulse Width Modlation) 
+                    que vol dir modulació de l'ample de banda
+                    D'acord amb el <a src="..........."> datasheet o fulla de caracterristiques de ESP32S3</a>
+                    //Hi ha 20 entrades de 12 bits mentre que en Arduino Uno hi ha 6 entrades analogiques de 10 bits
+    
+                    Serial.println(valorADC); // Println significa que imprimeixi via serial el valor de ADC  (0-1023 o 0-4095)
+                    delay(500); //Espera 500 milisegons o mig segon per mostrar el resultat 
+                }
+    </code></pre>
+  <p>Com podem veure a la foto de m´s amun d'arduino a lal cantonado inferior dreta es troben els 6 ADC o entrades analogiques  amb les lletres d'A0 fis a A6, i a la part superior de l'arduino podem veure els pins que son els 6 DACs o sortides analogiques amb les que estan señalades amb ~ (Pins 3,</p>
+  <img src="esp32s3" whi=800 height=600>
+  <p>Podem obserbar que a diferencia de lla gran majoria dede pins son GPI0
+  Si vlem veure un esuqema dles pins podem escriure pinout</p>
+
+
 </body>
 </html>
 
