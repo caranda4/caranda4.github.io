@@ -25,8 +25,34 @@
     tbody tr:hover { /* Pseudoclasse hover per a files */
       background-color: #e2e2e2;
     }
-  </style>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    body {
+    padding: 0; /* Elimina l'espai extra al voltant del cos */
+    }
+    .container-fluid {
+    max-width: 100%; /* Assegura que la navbar ocupa tota l'amplada */
+    }
+    .navbar {
+    padding-left: 0; /* Elimina el padding esquerra de la navbar */
+    }
+    .logo {
+    margin-right: 20px; /* Ajustar el marge si vols separar el logo del text */
+    margin-left: 0; /* Assegurar que no hi hagi marge a l'esquerra */
+    }
+    .navbar-brand {
+    display: flex;
+    align-items: center;
+    }
+    .brand-text {
+    white-space: nowrap; /* Això assegura que el text no es trenqui en múltiples línies */
+    font-size: 1.25rem; /* Ajusta la mida de la font si és necessari */
+    }  
+    .content-container {
+            margin-left: 10px;
+            margin-right: 10px; /* Marges laterals ajustats */
+            margin-top: 20px; /* Afegeix espai superior entre el contingut i la barra de menú */
+    }
+    </style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
        <a class="navbar-brand d-flex align-items-center" href="#">
     <img src="logo.png" alt="Logo" width="50" class="logo">
