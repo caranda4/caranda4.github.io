@@ -208,12 +208,37 @@
         que estan senyalaeds amb ~ (Pins 3, 5, 6, 9, 10, 11).</p>
         <p>En la imatge següent podem veure un esquema de ESP32S3</p>
         <img src="esp32s3.jpg" width="800" height="600">
-        <p>Podem observar que a diferèndia d'Arduino Uno la gran majoria de pins son GPIO, que significa General Purpose Input Output, en català 
+                <p>Podem observar que a diferèndia d'Arduino Uno la gran majoria de pins son GPIO, que significa General Purpose Input Output, en català 
         Pin d'Entrada i Sortida de Propòsit General, és a dir, que pot tenir moltes utilitats, entrada digital, sortida digital, entrada analògica, 
         sortida analògica. Si volem veure un esquema dels pins podem escriure "pinout".</p>
-        <p>Alguns pins són RTC, que significa Real Time Clock, que és un rellotge intern que funciona mitjançant una pila interna que dona suficient 
-        energia perque vibri un cristall de quars que és el que compta el temps</p>
-        <p>En el codi tenenim un pin 34 que es un pin intern que no veu l'usuari perque esta dins de la placa base fent la funció SPIQ 
-        segons el datasheet el GPIO34 corespon al pin fisic 39 per tant sempre hem de mirar el pinout oficial.</p>
+        <p>Alguns pins són RTC</p>
+        <h3>Com funciona les entrades analògiques dels microcontroladors?</h3>
+        <p>Els pins A0 a A5 son entrades analògiques i podem conectar una serie d'elements:</p>
+        <ul>
+                <li>Sensors de llum: LDR(Light Dependent Resistor), fotodiodes, cel·lules solars</li>
+                <li>Sensors de temperatura: LM35(Té una sortida lineal, 10 milivolts és un grau centrigrat i rang -55+150 semblant a TMP36,
+                 té menys rang i és menys precís), DHT11 o DHT22, mesuren temperatura i humitat i el 22 és més precís que el 11, DS18B20 té protocol one-wire</li>
+                
+        </ul>
+                <h4>Exemple amb el sensor de temperatura LM35</h4>
+                <pre>
+                <code>const int sensorPin= A0;
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int value = analogRead(sensorPin);
+  float millivolts = (value / 1023.0) * 5000;
+  float celsius = millivolts / 10; 
+  Serial.print(celsius);
+  Serial.println(" C");
+  delay(1000);
+}</code>
+                </pre>
+    </div>
 </body>
 </html>
