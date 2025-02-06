@@ -233,7 +233,8 @@
         float celsius = millivolts / 10; 
         Serial.print(celsius);
         Serial.println(" C");
-        delay(1000);}
+        delay(1000);} // Mirem aquest codi i quins valors donaria. Entre 0 i 500 graus, és a dir, no dona valors
+         negatius i no coincideix entre -55 i +150 graus amb resposta lineal mapejada.
     </code></pre>
     </div>
     <p> El codi de més amunt funcionaria amb un sensor de temperatura LM35, però es podria adaptar per qualsevol sensor
@@ -290,5 +291,11 @@ perque? Si soc un Arduino, els pins A0 - A5 només soc capaç de fer una cosa, l
     llenguatde de programació actualment. Si utilitzo processing i la biblioteca Arduino l'avantatge que tinc és
     que puc utilitzar totes les biblioteques de visió per ordinador, d'intel·ligencia artifial, de l'ordinador
     i fer aplicacions que només amb Arduino serien imposibles.</p>
+    <img src="lm35.png">
+    <p>La imatge anterior procedeix de la fulla de característiques de LM35, i es veu que té una resposta
+    lineal del voltatge i de la temperatura, de forma que a 2.9V ens donaria -55 graus i a 4.15V ens 
+    donaria 155 graus. Com fariem un codi de mapeig per això?</p>
+    float temp = map (value,0,1023,2900,4150)
+    float celsius = map (temp,2900,4150,-55,155)
 </body>
 </html>
