@@ -291,7 +291,7 @@ perque? Si soc un Arduino, els pins A0 - A5 només soc capaç de fer una cosa, l
     llenguatde de programació actualment. Si utilitzo processing i la biblioteca Arduino l'avantatge que tinc és
     que puc utilitzar totes les biblioteques de visió per ordinador, d'intel·ligencia artifial, de l'ordinador
     i fer aplicacions que només amb Arduino serien imposibles.</p>
-
+    <img src="lm35.png">
     <p>La imatge anterior procedeix de la fulla de característiques de LM35, i es veu que té una resposta
     lineal del voltatge i de la temperatura, de forma que a 2.9V ens donaria -55 graus i a 4.15V ens 
     donaria 155 graus. Com fariem un codi de mapeig per això?</p>
@@ -321,8 +321,13 @@ perque? Si soc un Arduino, els pins A0 - A5 només soc capaç de fer una cosa, l
     <img src="lm35sensor.jpeg" width="800" height="600">
     <p>A continuació tenim el gràfic de funcionament procedent del full de caracteristiques:</p>
     <img src="lm35.png">
-
-
+    <p>Per últim veurem el ccircuit fisic d'arduino</p>
+    <img src="            " width="    " height="     ">
+    <p>Hem vist que a 2900 milivolts fins a 4100 milivolts la resposta d'lm35 és lineal i va des de -55 fins a 150. com ho traduïm a codi</p>
+    <p>Primer hem d'entendre que en arduino, la seva entrada analògica A0 (o qualsevol fins a A5) és capaç de llegir voltatge i sempre comença amb zero i acaba amb 5 volts. 
+    Com hi ha 1024 nivells diferens la resolució és 5000/1024 = 4,88 nilivolts és a dir cada nivell augmenta 4,88 milivolts. És a dir la resolució en milivolts és 4,88
+    (5000 són milivolts perque la placa te una capacitat de 5v)</p>
+    <p>Com començem a mesurar emperatures entre 2900 i 4100, hem de saber a que correspon aquests dos numeros en base 1024 i a que correspon</p>
 
 
     
