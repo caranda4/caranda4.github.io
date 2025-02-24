@@ -390,7 +390,8 @@
             Serial.println("Llegint dades.txt...");//T'està dient que ha començat a llegir el fitxer
             while(fitxer.available()){//Mentre hi hagin dades per llegir dintre del fitxer 
             Serial.write(fitxer.read());//El que faria seria mostrar el contingut del fitxer. El mètode read el que fa amb la sintaxi del punt aplicada al fitxer va llegint caracter per caracter i el mostra al monitor sèrie fins que no hi ha més caracters per mostrar
-            }//Aquestaclau tanca el bloc de confguració
+            fitxer.close (); // Sempre s'ha de tancar el fitxer quan no es necessita, per evitar errors i alliberar memòria.
+              }//Aquestaclau tanca el bloc de confguració
             
             voild loop(){//Aquesta part del codi és la que s'execuaria tota la estona de forma repetitiva. No possariem llegir un ficher perque estaria llegint tota l'estona sense parar}
         </code>
