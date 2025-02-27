@@ -141,14 +141,6 @@
                 setTimeout(() => { button.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
             });
         }
-     <script>
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling.innerText;
-            navigator.clipboard.writeText(codeBlock).then(() => {
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => { button.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
-            });
-        }
     </script>
 </head>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
@@ -168,3 +160,8 @@ void loop() { //És un codi que s'executa sense parar fins que desconnecto l'Ard
     </code></pre>
 </body>
 </html>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+    <script src="https://brivera4pompeu.github.io/robotica/arduino/programacio/arduino.min.js"></script>
+    <script>hljs.highlightAll();</script>
