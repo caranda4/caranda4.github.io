@@ -159,40 +159,69 @@
     </ul>
     <h4>SPI</h4>
     <p>Exemple de SPI amb Arduino UNO:</p>
-    <p>El PIN 11 és un MOSI que significa Master Out Out Slaif, i el pin 12 és un MISO (Master In Slaif Out)</p>
-    <p>El pin MOSI envia dades des de l'Arduino (Mestre o master) cap els periferics (Slaves o eslaus ). Per exemple, si conectem un modul SD o tarjeta de memòria o una pantalla o display SPI significa que les dades s'enviarien pel PIN 11 o MOSI </p>
-    <p>El pin Miso farà el contrari que el pin MOSI, o sigui, rep dades des d'un esclau ap a l'Arduino i l'esclau pot ser el mateix que l'anterior, conectem una tarjeta de mamria o una pantalla </p>
-    <p> A més s'utilitzen altres pins com el SCK que significa Serial Clock, que enviara un senyal de rellotge, que serveix p sincronitzar la comunicació, l'Arduino és el mestre que enera aquest senyal que segueixen tots els esclaus</p>
-    <p>El pin 10 s'anomena el pin SS que significa Slave Select, fiu quin eclau esta actiu en un moment determinat.</p>
-    <p>Es neccesiten 2 pins més d'alimentació que són el VCC que és dde 5V i el GND que és el terra, que tanca el circuit.</p>
-    <p> A continuació veurem un codi per conprovar si la tarjeta SD està connectada correctament.</p>
+    <p>El PIN 11 és un MOSI que significa Master Out Slave In, i el pin 12 és un MISO <i>(Master In Slave Out)</i></p>
+    <p>El pin MOSi envia dades de de l'arduino (mestre o master) cap als perifèrics (slaves o esclaus). Per exemple, si conectem un mòdul SD
+        o tarjeta de memòria o una pantalla o display SPI significa que les dades s'envien pel pin 11 o MOSI.</p>
+    <p>El pin MISO farà el contrari que el pin MOSI, o sigui, rep dades des d'un esclau cap a l'Arduino i l'esclau pot ser el mateix que l'anterior,
+        conectem una tarjeta de memòria o una pantalla.</p>
+    <p>A més s'utilitzen altres pins com el SCK (pin 13 d'Arduino UNO) que significa Serial Clock, que enviarà un senyal de rellotge, que serveix per 
+        sincronitzar la comunicació, l'Arduino és el mestre que genera aquest senyal que segueixen tots els esclaus.</p>
+    <p>El pin 10 és el pin SS que significa <i>Slave Select</i>, diu quin esclau està actiu en un moment determinat.</p>
+    <p>Es necessiten 2 pins més d'alimentació que són el VCC de 5v o el GND que és el terra, que tanca el circuit.</p>
+    <p>A continuació veurem un codi per comprovar si la targeta SD està connectada correctament:</p>
+    <pre><code>
+    #include <SPI.h>; // Afegim la biblioteca de C++ Arduino que controla el protocol de comunicació SPI.
+    #include <SD.h>; // Afegim o importem la biblioteca que controlen els arxius per <i>"Read, Write, Rewrite, Delete"</i>
+    const int chipSelect = 10; // Fem que el pin 10 sigui número enter i constant i s'anomeni "chipSelect" perquè controlarà 
+    // la selecció de la targeta SD, quan l'Arduino vol comunicar-se amb ella.
 
-      <pre>
-        <code>
-          #include 
-          <SPI.h>//Afegim la biblioteca de C++ Arduino que controla el protool de comunicació SPI.
-          #include 
-          <SD.h>//Afegim o importem la biblioteca que controlen els arxius que ccontrolen els arrxius per "Read Write Rewrite Delete" es a dir per llegir/escriure/borrar arxius
-            const int chipSelect = 10;//Fem que el pin 10 sigui un número enter i constant i s'anomeni "chipSelect" perquè controlarà le selecció de la targeta SD. Aquest pin serveix per activar la targeta SD, quan l'Arduino vol comunicar-se amb ella.
-            voild setup(){
-            Serial.beguin(9600);//9600 són bauds,  els bauds són la quantitat de simbols transmesos per segon, en la communicació seria la comunicació 1 baud = 1 bit/segon, però en alguns casos un baud pot ser més d'un bit/segon
-            Serial.print("Iniciant la targeta SD...");//Això significa que sortira a la consola aquest missatge. 
-            if(!SD.Begin(chipSelect)){ //Es simbol ! nega, vol dir que si no s'inicia la targeta SD
-            Serial.println("Error no s'ha detectat la targeta SD");//Si es compleix la condició anterior, posa aquest misatge a la consola.
-            return;/Significa que acabi la funció setup si la targeta no està disponible.
-            }//Aquesta clau tanca el condicional si no detecta la SD
-            Serial.println("Targeta SD detectada correctament");
-            File fitxer = SD.open("dades.txt");//File és una classe de objectes que gestiona arxius i quan escric un nom al costat com "fitcher" declaro una variable per gestionar un fitxer existeix i es pot obrir correctamen la paraula fitcher serà valida, en cas contrari, el fitxer donarà resposa com a nul.
-            if (fitxer){//Vol dir si el fitxer s'ha pogut obrir perque és valud, executa el codi següent, i si no passa directamentper per else i mostra un error.
-            Serial.println("Llegint dades.txt...");//T'està dient que ha començat a llegir el fitxer
-            while(fitxer.available()){//Mentre hi hagin dades per llegir dintre del fitxer 
-            Serial.write(fitxer.read());//El que faria seria mostrar el contingut del fitxer. El mètode read el que fa amb la sintaxi del punt aplicada al fitxer va llegint caracter per caracter i el mostra al monitor sèrie fins que no hi ha més caracters per mostrar
-            fitxer.close (); // Sempre s'ha de tancar el fitxer quan no es necessita, per evitar errors i alliberar memòria.
-              }//Aquestaclau tanca el bloc de confguració
-            
-            voild loop(){//Aquesta part del codi és la que s'execuaria tota la estona de forma repetitiva. No possariem llegir un ficher perque estaria llegint tota l'estona sense parar}
-        </code>
-      </pre>
+    void setup() {
+    Serial.begin(9600); // 9600 són bauds, els bauds són la quantitat de símbols transmesos per segon.
+    // 1 baud = 1 bit/segon, però en alguns casos 1 baud pot ser més de 1 bit/segon
+    Serial.print("Iniciant SD ...");
+    if (!SD.begin(chipSelect)) { // ! nega, vol sir que si no s'inicia la targeta SD
+        Serial.println("Error: no s'ha detectat la targeta SD"); // Si es compleix la condició anterior, posa aquest missatge a la consola.
+        return; // Significa que acabi la funció setup si la targeta no està disponible.
+    } // Aquesta clau tanca la condició if si no detecta la targeta
+    Serial.println("Targeta SD detectada correctament");
+    File fitxer = SD.open("dades.txt"); // File és una classe 'objectes que gestiona arxius i quan escric un nom al costat com fitxer declaro una variable per gestionar un fitxer.
+    // Si el fitxer existeix i es pot obrir correctament la variable fitxer serà vàlida i si no existeix o hi ha un problema el fitxer donarà com a resposta un valor nul.
+    if (fitxer) { // Si el fitxer es pot obrir correctament s'executi el codi següent, i si no passa directament a else.
+        Serial.println("Llegint dades.txt:"); // Ha començat a llegir el fitxer
+        while (fitxer.available()) { // Mentre hi hagi dades per llegir dintre del fitxer
+            Serial.write(fitxer.read()); // Mostra el contingut del fitxer. El mètode read el que fa amb la sintaxi del punt aplicada al fitxer va llegir caracter a caracterfins que s'acabin
+        } // Aquesta clau tanca el bucle while
+        fitxer.close(); // Sempre s'ha de tancar el fitxer quan no es necessita per evitar errors i alliverar memòria.
+    } // Aquesta clau tanca la condició if
+    } // Aquesta clau tanca la funció setup
+
+    void loop() { // Aquesta part del codi és la que s'executaria tota l'estona de forma repetitiva. No possariem per exemple llegir un fitxer perquè estriem llegint tota l'estona.
+    }
+    </code></pre>
+<h2>Exemple comunicació SPI entre MAX6675 i ESP32S3</h2>
+        <p>MAX6675 és un sensor de tempertaura amb molts circuits interns. En primer lloc té un termoparell de tipus K, que
+            permet mesurar temperatures molt amplies de -50 graus a 1000 graus amb una precisió de 0,25 graus i amb un preu de 5 euros.
+            També te un convertidor analogic digital de 12 bits i un circuit per adaptar a la comunicacio </p>
+        
+        <p>Un termoparell de tipus K és una unió de 2 aliatges que genera un corrent electric proporcionada a la temperautra. Els 2 aliatges
+            més comuns: el Cromel consituit per crom i niquel i el alumel, constituit per alumini i niquel. L'efecte Seebeck és la tensió
+            electrica provocada per el canvi de temperatura que és molt petita la corrent del ordre de microvolts i que necesitem amplificar
+            amb un circuit amplificador amb l'ordre de minivolts i després amb un convertidor analogic digital de 12 bits, convertirlo en un número
+            hexadecimal (els números hexadcimals comencen amb 0x, als binaris amb 0b i els octals de 0o), dintre del número pot haver el valor
+            per convertir en celsius </p>
+                <img src="Max2.webp">
+        <p> A la imatge superior podem veure que MAX6675 està conectat a SP32S3 per alimentació electrica al pin de
+            3,3 volts (cable vermell) i  un GND (cable negre), també a de estar connectat a un MISO perque volem que funcioni com un sensor, es a dir, master input
+            que vol dir que al microcontrolador actua com a mestre, que rep eentrades o inputs i el sensor és un esclau que dona a output.
+            En ESP32 MISO és posa amb les sigles SO que vol dira serial out que està en el GPIO19, vol dir que surt informació sèrie cap al mestre </p>
+        
+            <p> La comunicació SPI necessita ser sincrona i per aixo conectem el cable GPIO5 que és un SSK o serial clock o rellotge serie
+                que sincronitza el enviament de temperaturas mal microcontrolador </p>
+        
+        <p> Necesitem connectar un cable CS al PIN CS que significa Chip select ens permet comunicació serie i esta en el
+            GPIO23. </p>
+        <p> Resumint,necessitem molts cables per comunicació entre el sensor de temperatura i el microcontrolador. Hi ha tecnologies
+            que necessiten un cable i es diuen one-wire com per exemple com el sensor de temperatura DS20
 
     <p>You can work with different software as you can read under Microcontrollers>Software for microcontollers in this
         web as for example using the <a
@@ -379,11 +408,6 @@
             target="_blank">cloud Arduino IDE.</a>
     </p>
     </div>
-
-    <!-- Scripts necessaris -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
 </body>
 
