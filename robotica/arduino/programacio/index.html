@@ -22,7 +22,81 @@
             font-size: 16px;
             color: #007bff;
         }
+
+        body {
+    padding: 0; /* Elimina l'espai extra al voltant del cos */
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    }
+    .container-fluid {
+    max-width: 100%; /* Assegura que la navbar ocupa tota l'amplada */
+    }
+    .navbar {
+    padding-left: 0; /* Elimina el padding esquerra de la navbar */
+    }
+    .logo {
+    margin-right: 20px; /* Ajustar el marge si vols separar el logo del text */
+    margin-left: 0; /* Assegurar que no hi hagi marge a l'esquerra */
+    }
+    .navbar-brand {
+    display: flex;
+    align-items: center;
+    }
+    .brand-text {
+    white-space: nowrap; /* Això assegura que el text no es trenqui en múltiples línies */
+    font-size: 1.25rem; /* Ajusta la mida de la font si és necessari */
+    }  
+    .content-container {
+            margin-left: 2px;
+            margin-right: 2px; /* Marges laterals ajustats */
+            margin-top: 2px; /* Afegeix espai superior entre el contingut i la barra de menú */
     </style>
+    </head>
+<body>
+    <!-- Barra de navegació -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Logotip i títol de la web -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://caranda4.github.io/logo.png" alt="Logotip de la web de Carla" width="50" class="logo">
+        <span class="brand-text ms-2">Web de Carla</span>
+      </a>
+      <!-- Botó per al menú desplegable en pantalles petites -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Enllaços de la barra de navegació -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://caranda4.github.io/">Inici</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://caranda4.github.io/robotica/coldplay">Projecte Coldplay</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Braç robòtic</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://caranda4.github.io/robotica/cdirecta">Cinemàtica directa</a>
+              <a class="dropdown-item" href="https://caranda4.github.io/robotica/cinversa">Cinemàtica inversa</a>
+              <a class="dropdown-item disabled" href="#" aria-disabled="true">Projecte 3 (en desenvolupament)</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://caranda4.github.io/robotica/arduino/">Arduino</a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Braç robòtic</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://caranda4.github.io/robotica/arduino/">Arduino</a>
+              <a class="dropdown-item" href="https://caranda4.github.io/robotica/arduino/configuracio/">Configuració</a>
+              <a class="dropdown-item" href="https://caranda4.github.io/robotica/arduino/programacio/">Programació</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <script>
         function copyCode(button) {
             const codeBlock = button.nextElementSibling.innerText;
@@ -33,7 +107,6 @@
         }
     </script>
 </head>
-<body>
   <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-python">    
 // 02_01_blink
 
@@ -48,3 +121,5 @@ void loop() {  //ës un codi que s'executa sense parar fins que desconnecto l'Ar
  delay(500);
 }
   </code></pre>
+</body>
+</html>
