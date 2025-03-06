@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="ca">   
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,41 +98,6 @@
       </div>
     </div>
   </nav>
-    <script>
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling.innerText;
-            navigator.clipboard.writeText(codeBlock).then(() => {
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => { button.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
-            });
-        }
-    </script>
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programació amb Arduino</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
-    <script src="https://brivera4pompeu.github.io/robotica/arduino/programacio/arduino.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
-        pre { background: #f4f4f4; padding: 10px; overflow-x: auto; position: relative; }
-        code { font-family: monospace; }
-        .copy-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            color: #007bff;
-        }
-    </style>
     <script>
         function copyCode(button) {
             const codeBlock = button.nextElementSibling.innerText;
@@ -438,7 +403,8 @@ void flash() {
 </code></pre>
 <p>A continuació veurem el codi flash però amb paràmetres. </p>
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-    // 03_03_blink_functrion_params
+    
+// 03_03_blink_functrion_params
 
 const int ledPin = 13;
 const int delayPeriod = 250;
@@ -454,15 +420,27 @@ void loop() {
 // Podem veure que la funció te dos paràmetres que son 2 nombres enters i que s'anomenen "numFlashes" i "d"
 // numFlashes no esta definit com a variable global, és una variable local definida dins de la funció "flash"
 // i no te un valor predeterminat, només ha de complir que sigui un valor enter. El mateix per a la variable "d"
-void flash(int numFlashes, int d) {
-  for (int i = 0; i < numFlashes; i ++) {
+
+  <pre><code>
+  void flash(int numFlashes, int d) {
+  for (int i = 0; i &lt; numFlashes; i ++) {
     digitalWrite(ledPin, HIGH);
     delay(d);
     digitalWrite(ledPin, LOW);
     delay(d);
   }
 }
-</code></pre>
 
+<h1>Funcions en Arduino</h1>
+<p>Les funcions d'arduino són semblants a les funcions que veiem a cinemàtica directa i inversa. En el cas de la cinemàtica robòtica 
+   utilitzavem funcions Javascript dintre d'un codi HTML. Avans cada funció com per exemple, calculatePosition () era una funció 
+   sense arguments o paràmetres que estava identificada amb un bloc de codianomenat function i s'executava quan clicavem un botó. 
+   Dintre d'aquest bloc hi havien instruccions que permeten fer càlculs matemàtics. En el següent codi d'arduino, tenim una funcion 
+   flash amb dos peràmetres que eren números enters anomenat ledPin i de delayPeriod que identifiquen el pin que està connectat i el 
+            temps que ha d'estar encès o apagat.
+            </p>
+        </div>
+      
+</code></pre>
 </body>
 </html>
