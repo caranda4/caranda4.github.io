@@ -421,7 +421,7 @@ void loop() {
 // numFlashes no esta definit com a variable global, és una variable local definida dins de la funció "flash"
 // i no te un valor predeterminat, només ha de complir que sigui un valor enter. El mateix per a la variable "d"
 
-  <pre><code>
+  <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
   void flash(int numFlashes, int d) {
   for (int i = 0; i &lt; numFlashes; i ++) {
     digitalWrite(ledPin, HIGH);
@@ -430,7 +430,7 @@ void loop() {
     delay(d);
   }
 }
-
+</code></pre>
 <h1>Funcions en Arduino</h1>
 <p>Les funcions d'arduino són semblants a les funcions que veiem a cinemàtica directa i inversa. En el cas de la cinemàtica robòtica 
    utilitzavem funcions Javascript dintre d'un codi HTML. Avans cada funció com per exemple, calculatePosition () era una funció 
@@ -441,7 +441,50 @@ void loop() {
     
 <p> Ara farem que un bucle for ss'executi 20 o x vegades dintre d'unbucle for localitzat dintre d'un bucle infinit loop. Ho aconseguim 
     amb la paraula clau static, que fa que una variable s'inicialitzi una vegada que correm el codi  i mai més. La paraula static es deriva 
-    del llenguatge C i Arduino és un derviat de C++ i Processing, </p>
+    del llenguatge C i Arduino és un derviat de C++ i Processing. Si eliminem noomés la paraula static del codi seguent, s'executara 
+    infinites vegades. Aixi aconseguim dins de la funció loop controlar el nimero de execusions, també o podrieem aplicar a altres funcions.
+    La  </p>
+<h1>Arrays i strings</h1>
+<p> Un array es una forma de contenir un llistat de valors, moltes vegades són valors enters i s'accedeix amb ells per la seva posició, 
+    sent la primera posició [0] del array o element 0. El codi seguent el que fa es a la primera linea definelx una array amb 9 valors, 
+    els imprimeix en el monitor serie el seus valors. Serà util per el nostre codi morse.</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    int durations[] = {200, 200, 200, 500, 500, 500, 200, 200, 200};
+
+    void setup() {
+      Serial.begin(9600);  
+      for (int i = 0; i < 9; i++) {
+        Serial.println(durations[i]);
+      }
+    }
+void loop() {}
+</code></pre>
+
+<p>El codi segguen ja es un codi morse perqu combina un array, un bucle for que lleigeix el array i l'aplica a  la funció
+flas, d'aquesta forma es com si escrivis flash (200), flash (200),flash (200), flash (500),flash (500), flash (500), flash (200), flash (200)flash (200)</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    const int ledPin = 13;
+    int durations[] = {200, 200, 200, 500, 500, 500, 200, 200, 200};
+
+    void setup() {
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop()  {
+      for (int i = 0; i < 9; i++) {
+        flash(durations[i]);
+      }
+      delay(1000);
+    }
+
+    void flash(int duration) {
+       digitalWrite(ledPin, HIGH);
+       delay(duration);
+       digitalWrite(ledPin, LOW);
+       delay(duration);
+    }
 </code></pre>
 </body>
 </html>
