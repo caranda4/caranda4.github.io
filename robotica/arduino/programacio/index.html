@@ -525,23 +525,124 @@ flas, d'aquesta forma es com si escrivis flash (200), flash (200),flash (200), f
     
   </table>
   <p>ASCII significa American Standard Code for Information Interchange i va ser descrit a l'any 1967 amb l'objectiu 
-  d'intercambiar informació amb ordinadors</p>
-  <p>UTF8 és un sistema Unicode Transformation Format que permet escriure més d'un milió de caràcters diferents
-  “🙂” U+1F642</p>
-  <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-    
-// sketch 05-03
+            d'intercambiar informació amb ordinadors</p>
+        <p>UTF8 és un sistema Unicode Transformation Format que permet escriure més d'un milió de caràcters diferents
+            “🙂” U+1F642</p>
+            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+                // sketch 05-03
 
-char message[] = "Hello";
+                char message[] = "Hello";
+                
+                void setup() {
+                  Serial.begin(9600);
+                  message[0] = 'h';
+                }
+                
+                void loop() {
+                  Serial.println(message);
+                  delay(1000);
+                }
+            </code></pre>
 
-void setup() {
-  Serial.begin(9600);
-  message[0] = 'h';
+        </div>
+        <div class="content-container">
+            <h3>Importància dels punters + Exemple de codi Morse</h3>
+            <p>Hi ha llenguatges amb i sense punters.</p> 
+            <ul>
+                <li>Exemples de llenguatges amb punters: C i els seus derivats com arduino</li>
+                <li>Exemples de llenguatges sense punters: Python i Javascript</li>
+            </ul>
+            <p>El punter llegeix el contingut d'una adreça de memoria i tambe la posició de la mateixa adreça i pot manipular-la. Hi ha posicions d'adreçes especials, com els sectors d'arrancada.</p>
+            <p>El punter serveix per tenir el control total per part del programador de la memoria i els recursos de l'ordinador</p>
+            <p>El "Problema" que te es que pot provocar errors a la memoria o accesos no permesos si no saps com fer funcionar correctament el punter</p>
+            <p>Els dos símbols per utilitzar punters son: L'arterisc "*", que serveix per llegir el contingut de l'adreça de memoria. I l'ampersand "&", que llegieix la posició de l'adreça de memoria</p>
+            <p>La memoria de l'ordinador la podem imaginar com caixes d'una llista on cada caixa te un valor unic assignat en hexadecimal que comença per 0x. Cada caixa te un contingut que pot ser buit (0) o pot contenir un valor</p>
+            
+            <h4>Operacions avançades amb punters</h4>
+            <ul>
+                <li><b>Accés directe a la memoria:</b> Permet modificar valors en posicions especifiques.</li>
+                <li><b>Manipulació eficient d'arrays i strings (cadenes):</b> L'array esencialment es una llista adreçes amb principi i final amb un punter al primer element.</li>
+                <li><b>Passar grans quantitats de dades a funcions:</b> En lloc de copiar valors, els punters passen la seva adreça, estalviant memoria i temps. Aquest es un dels motius per els que C i derivats son mes rapids que python o JS.</li>
+                <li><b>Creació d'estructures dinamiques:</b> Es pot crear coses com grafics o llistes enllaçades de forma facil</li>
+                <li><b>Interacció amb microcontroladors senzilla:</b> Els microcontroladors utilitzen llenguatges de baix nivell (low-level languages) que son mes properes al hardware. Encara que, gracies a l'augment de la memoria, s'han pogut crear llenguatges com micropython o circutpython.</li>
+            </ul>
+            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+                //Al principi del codi, abans de la funció de configuració "setup" i  la funció principal "loop" que s'executa continuament, hem d'escriure sempre variables o constants.
+                //A més, al principi dle codi trobem les constants i variables globals, anomenades així perque es poden cridar o executar des de qualsevol part del codi, a diferencia de les variables locals que es defineiexn i s'utilitzendintre de la mateixa funnció "loop" o una funció adicional.
+                //Davant de les variables glbals hauriem d'afegir les biblioteques necessaries per fer funcionar el nostre codi, (amb "#include <nom_de_la_biblioteca.h>) l'extensió "h" deriva de C i sigrnifica biblioteca de headers o encapçalaments.
+                                              
+                const int ledPin = 13;  //
+                const int dotDelay = 200;  //"const" vol dir que la variable no es modificarà dins del codi,"int" col dir integuer, o sigui que el nombre que agafem haurà de ser enter, ja que els pins tenen números enters. 
+                                           //El pin 13 és especial, té una resitencia interna en el cas d'Arduino Uno que premet connectat directament un led, perqyè està al contat del pin GND i puc clavar o connectar un led sense cap circuit o placa
+                                           //"ledPin" és una variable constant i s'anomena així per l'usuari, utilizanr camelCase i referint-nos al que fa aquest pin.
+                    
+                char* letters[] = { 
+                  ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",    // A-I
+                  ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.",  // J-R
+                  "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."          // S-Z
+                };
+                    //Més amunt i més abaix tinc dos arrays composats cadascun d'ells per arrays interns i cada array intern està composat de caracters que nomes poden ser "." o "-".
+                    //Quan jo crido "letters[0]" el que jo obtinc ".-" o sigui la lletra A en codi Morse.
+                    //Aquesta forma de treballar és molt més dolenta, des d'un punt de vista d'eficiencia perquè estic utilitzant un byte (un byte són 8 bits) sencer per cada punt o ratlla.
+                    //Un bit és un valor de 0 o 1 i això es podria utilitzar per fer el punts o les ratllesperquè els puts i les ratlles són dos estats, o 0 o 1, es podria asignar el 0 al punt i la ratlla l'1, fant-ho més aficient.
+                    //En un byte hi han 8 bits i per això es podrin fer 256 caracters diferents.
+                    //Quants bytes de mamoria necesitarem utilitzant bytes o bits per codificar Morse?
+                    //Aproximadament el morse te 109 punts o rallespels numeros o lletres, de la manera més eficien tindriem un ús de 14 bytes i de la manera menys eficienttindriem (109/8) 14 bytes i de la manera menys eficient (109 · 8) 872 bytes. Hem de tenir en compte
+
+                    
+                    //De fet ASCII utilitza 7 bits per crear 128 caracters (de 0 a 127 )
+                    //"*" és molt important, ja que ens indica que és un punter, "[]" ens indica que és un array, "numbers" m'indica el valor de l'array, i char m'indica el tipus d'element (que son caracters) que hi ha dins de l'array.
+                    //L'array de sota es diu numbers però està construit per caracters, perquè tant els numeros con les lletres estan construides per "." o "-" que son caracters
+                char* numbers[] = {
+                  "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."};
+
+            void setup() {
+              pinMode(ledPin, OUTPUT);
+              Serial.begin(9600);
+            }
+
+            void loop() {
+              char ch;
+              if (Serial.available() > 0) {
+                ch = Serial.read();
+                if (ch >= 'a' && ch <= 'z') {
+                  flashSequence(letters[ch - 'a']);
+                }
+                else if (ch >= 'A' && ch <= 'Z') {
+                  flashSequence(letters[ch - 'A']);
+                }
+                else if (ch >= '0' && ch <= '9') {
+                  flashSequence(numbers[ch - '0']);
+                }
+                else if (ch == ' ') {
+                  delay(dotDelay * 4);  // gap between words  
+                }
+                  }
+                    }
+
+void flashSequence(char* sequence) {
+  int i = 0;
+  while (sequence[i] != NULL) {
+    flashDotOrDash(sequence[i]);
+    i++;
+  }
+  delay(dotDelay * 3);    // gap between letters
 }
 
-void loop() {
-  Serial.println(message);
-  delay(1000);
+void flashDotOrDash(char dotOrDash) {
+  digitalWrite(ledPin, HIGH);
+  if (dotOrDash == '.') {
+    delay(dotDelay);           
+  }
+  else { 
+    // must be a dash 
+    delay(dotDelay * 3);           
+  }
+  digitalWrite(ledPin, LOW);    
+  delay(dotDelay); // gap between flashes
 }
+ </code></pre>
+</div>
 </body>
 </html>
