@@ -528,203 +528,230 @@ flas, d'aquesta forma es com si escrivis flash (200), flash (200),flash (200), f
             d'intercambiar informació amb ordinadors</p>
         <p>UTF8 és un sistema Unicode Transformation Format que permet escriure més d'un milió de caràcters diferents
             “🙂” U+1F642</p>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-                // sketch 05-03
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    
+    // sketch 05-03
 
-                char message[] = "Hello";
+    char message[] = "Hello";
                 
-                void setup() {
-                  Serial.begin(9600);
-                  message[0] = 'h';
-                }
+    void setup() {
+      Serial.begin(9600);
+      message[0] = 'h';
+    }
                 
-                void loop() {
-                  Serial.println(message);
-                  delay(1000);
-                }
-            </code></pre>
+    void loop() {
+      Serial.println(message);
+      delay(1000);
+    }
+</code></pre>
 
-        </div>
-        <div class="content-container">
-            <h3>Importància dels punters + Exemple de codi Morse</h3>
-            <p>Hi ha llenguatges amb i sense punters.</p> 
+</div>
+<div class="content-container">
+    <h3>Importància dels punters + Exemple de codi Morse</h3>
+        <p>Hi ha llenguatges amb i sense punters.</p> 
             <ul>
                 <li>Exemples de llenguatges amb punters: C i els seus derivats com arduino</li>
                 <li>Exemples de llenguatges sense punters: Python i Javascript</li>
             </ul>
-            <p>El punter llegeix el contingut d'una adreça de memoria i tambe la posició de la mateixa adreça i pot manipular-la. Hi ha posicions d'adreçes especials, com els sectors d'arrancada.</p>
-            <p>El punter serveix per tenir el control total per part del programador de la memoria i els recursos de l'ordinador</p>
-            <p>El "Problema" que te es que pot provocar errors a la memoria o accesos no permesos si no saps com fer funcionar correctament el punter</p>
-            <p>Els dos símbols per utilitzar punters son: L'arterisc "*", que serveix per llegir el contingut de l'adreça de memoria. I l'ampersand "&", que llegieix la posició de l'adreça de memoria</p>
-            <p>La memoria de l'ordinador la podem imaginar com caixes d'una llista on cada caixa te un valor unic assignat en hexadecimal que comença per 0x. Cada caixa te un contingut que pot ser buit (0) o pot contenir un valor</p>
+        <p>El punter llegeix el contingut d'una adreça de memoria i tambe la posició de la mateixa adreça i pot manipular-la. Hi ha posicions d'adreçes especials, com els sectors d'arrancada.</p>
+        <p>El punter serveix per tenir el control total per part del programador de la memoria i els recursos de l'ordinador</p>
+        <p>El "Problema" que te es que pot provocar errors a la memoria o accesos no permesos si no saps com fer funcionar correctament el punter</p>
+        <p>Els dos símbols per utilitzar punters son: L'arterisc "*", que serveix per llegir el contingut de l'adreça de memoria. I l'ampersand "&", que llegieix la posició de l'adreça de memoria</p>
+        <p>La memoria de l'ordinador la podem imaginar com caixes d'una llista on cada caixa te un valor unic assignat en hexadecimal que comença per 0x. Cada caixa te un contingut que pot ser buit (0) o pot contenir un valor</p>
             
-            <h4>Operacions avançades amb punters</h4>
-            <ul>
-                <li><b>Accés directe a la memoria:</b> Permet modificar valors en posicions especifiques.</li>
-                <li><b>Manipulació eficient d'arrays i strings (cadenes):</b> L'array esencialment es una llista adreçes amb principi i final amb un punter al primer element.</li>
-                <li><b>Passar grans quantitats de dades a funcions:</b> En lloc de copiar valors, els punters passen la seva adreça, estalviant memoria i temps. Aquest es un dels motius per els que C i derivats son mes rapids que python o JS.</li>
-                <li><b>Creació d'estructures dinamiques:</b> Es pot crear coses com grafics o llistes enllaçades de forma facil</li>
-                <li><b>Interacció amb microcontroladors senzilla:</b> Els microcontroladors utilitzen llenguatges de baix nivell (low-level languages) que son mes properes al hardware. Encara que, gracies a l'augment de la memoria, s'han pogut crear llenguatges com micropython o circutpython.</li>
-            </ul>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    <h4>Operacions avançades amb punters</h4>
+        <ul>
+            <li><b>Accés directe a la memoria:</b> Permet modificar valors en posicions especifiques.</li>
+            <li><b>Manipulació eficient d'arrays i strings (cadenes):</b> L'array esencialment es una llista adreçes amb principi i final amb un punter al primer element.</li>
+            <li><b>Passar grans quantitats de dades a funcions:</b> En lloc de copiar valors, els punters passen la seva adreça, estalviant memoria i temps. Aquest es un dels motius per els que C i derivats son mes rapids que python o JS.</li>
+            <li><b>Creació d'estructures dinamiques:</b> Es pot crear coses com grafics o llistes enllaçades de forma facil</li>
+            <li><b>Interacció amb microcontroladors senzilla:</b> Els microcontroladors utilitzen llenguatges de baix nivell (low-level languages) que son mes properes al hardware. Encara que, gracies a l'augment de la memoria, s'han pogut crear llenguatges com micropython o circutpython.</li>
+        </ul>
 
-                //Al principi del codi, abans de la funció de configuració "setup" i  la funció principal "loop" que s'executa continuament, hem d'escriure sempre variables o constants.
-                //A més, al principi dle codi trobem les constants i variables globals, anomenades així perque es poden cridar o executar des de qualsevol part del codi, a diferencia de les variables locals que es defineiexn i s'utilitzendintre de la mateixa funnció "loop" o una funció adicional.
-                //Davant de les variables glbals hauriem d'afegir les biblioteques necessaries per fer funcionar el nostre codi, (amb "#include <nom_de_la_biblioteca.h>) l'extensió "h" deriva de C i sigrnifica biblioteca de headers o encapçalaments.
-                                              
-                const int ledPin = 13;  //
-                const int dotDelay = 200;  //"const" vol dir que la variable no es modificarà dins del codi,"int" col dir integuer, o sigui que el nombre que agafem haurà de ser enter, ja que els pins tenen números enters. 
-                                           //El pin 13 és especial, té una resitencia interna en el cas d'Arduino Uno que premet connectat directament un led, perqyè està al contat del pin GND i puc clavar o connectar un led sense cap circuit o placa
-                                           //"ledPin" és una variable constant i s'anomena així per l'usuari, utilizanr camelCase i referint-nos al que fa aquest pin.
-                    
-                char* letters[] = { 
-                  ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",    // A-I
-                  ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.",  // J-R
-                  "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."          // S-Z
-                };
-                    //Més amunt i més abaix tinc dos arrays composats cadascun d'ells per arrays interns i cada array intern està composat de caracters que nomes poden ser "." o "-".
-                    //Quan jo crido "letters[0]" el que jo obtinc ".-" o sigui la lletra A en codi Morse.
-                    //Aquesta forma de treballar és molt més dolenta, des d'un punt de vista d'eficiencia perquè estic utilitzant un byte (un byte són 8 bits) sencer per cada punt o ratlla.
-                    //Un bit és un valor de 0 o 1 i això es podria utilitzar per fer el punts o les ratllesperquè els puts i les ratlles són dos estats, o 0 o 1, es podria asignar el 0 al punt i la ratlla l'1, fant-ho més aficient.
-                    //En un byte hi han 8 bits i per això es podrin fer 256 caracters diferents.
-                    //Quants bytes de mamoria necesitarem utilitzant bytes o bits per codificar Morse?
-                    //Aproximadament el morse te 109 punts o rallespels numeros o lletres, de la manera més eficien tindriem un ús de 14 bytes i de la manera menys eficienttindriem (109/8) 14 bytes i de la manera menys eficient (109 · 8) 872 bytes. Hem de tenir en compte
-
-                    
-                    //De fet ASCII utilitza 7 bits per crear 128 caracters (de 0 a 127 )
-                    //"*" és molt important, ja que ens indica que és un punter, "[]" ens indica que és un array, "numbers" m'indica el valor de l'array, i char m'indica el tipus d'element (que son caracters) que hi ha dins de l'array.
-                    //L'array de sota es diu numbers però està construit per caracters, perquè tant els numeros con les lletres estan construides per "." o "-" que son caracters
-                char* numbers[] = {
-                  "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."};
-
-            void setup() {
-             pinMode(ledPin, OUTPUT);
-              Serial.begin(9600);
-              // En el setup o configuració del microcontrolador indiquem que el pin 13 que ara es diu "ledPin" sigui és una sortida o "Output"
-              // Indiquem a l'arduino que es comuniqui amb l'ordinador a traves del port serial o serie i comenci a una velocitat de 
-              // 9600 bauds o simbols/segon que són aprox. 9600 bits/segon.
-            }
-  
-
-            void loop() {
-  // El loop és el codi principal, i el que el seu nom indica que es repeteix sense parar en un "loop".
-  // "char" signica que utilitzem una variable de tipus caracter i l'anomenem "ch".
-  // "Serial.available" significa si està disponible la comunicació serie o "serial monitor" que comunica  el microcontrolador
-  // arduino amb el nostre ordinador o dispositiu.
-  // La comunicació entre arduino i l'ordinador és complexa: 
-  // Primer pas: l'ordinador envia dades al monitor serie a traves de l'USB per un mecanisme que s'anomena "USB to Serial"
-  // Segon pas: la transformació anterior d'USB to Serial la fa un xip especial dintre d'Arduino.
-  // Tercer pas: les dades en format serie arriben a una part del microcontrolador anomenada UART que significa 
-  // "Universal Asynchronous Receiver Transmiter"
-  // Quart pas: l'UART envia les dades que rep a una memòria temporal o "buffer" que pot enmagatzemar 128 bytes fins que s'elimina en
-  // el moment que es llegeix -Soy Marticon -by Miguel Angel
-  // La funció serial available retorna el número de bytes de dades en el "buffer" que estan esperant per ser llegits. Si no hi ha cap missatge
-  // esperant a ser llegit, la funció retorna a 0
-  // La funció "Serial.read" el que fa és llegir el primer o el següent caracter disponible i l'emmagatzema a la variable "ch"
-  // El símbol >= o <= s'utilitza per comparar amb el número d'ASCII que correspon per la lletra "a" per tant, podriem canviar l'a
-  // pel número 97 i la z és el número 122.
-  // Els altres caracters que podem canviar serien 'A' pel número 65, Z pel número 90.
-  // El caracter '0' correspon al número 48 i el caracter '9' correspon al número 57.
-  // El caracter ' ' correspon al número 32.
-  // Els condicionals que hi han dintre del condicional general "Serial.avaliable" el que fan és dir es que si el caracter és 
-  // entre la a i la z le restes el valor -a
-  // Imaginem que la primera lletra és una 'c', que equival al número 99, llavors si li restem la 'a' que és 97 quedaria un número 2.
-  // El número 2 està dintre d'un ([]) és a dir, dintre d'una array i correspondria al tercer element de l'array de les lletres.
-  // Aquest tercer element és "-.-."
-  // Un altre exemple seria la 'H' estaria avaluat en un altre condicional, el de les mayuscules, aquest caracter equival 
-  // al número 72, i li he de restar la 'A' que equival al número 65, per tant ch - 'A' és 7 que és el vuité element de l'array
-  // de majúscula [7] i letters[7] és "...." .
-  // Per qué s'ha de restar?
-  // Per conexier la posició de la lletra a l'array, perquè hem possat l'array ordenat 
-  // des de la 'a' fins la 'z' i des de la 'A' fins la 'Z'
-  // Ara tenim el número per exemple letters[7] igual a "...." i el que volem és aplicar una funció.
-  // Aquesta funció és la funció "flashSequence" que agafarà l'element vuité de l'array com a arguments 
-
-             char ch;
-              if (Serial.available() > 0) {
-                ch = Serial.read();
-                if (ch >= 'a' && ch <= 'z') {
-                  flashSequence(letters[ch - 'a']);
-                }
-                else if (ch >= 'A' && ch <= 'Z') {
-                  flashSequence(letters[ch - 'A']);
-    }
-    else if (ch >= '0' && ch <= '9') {
-      flashSequence(numbers[ch - '0']);
-    }
-    else if (ch == ' ') {
-      delay(dotDelay * 4);  // gap between words  
-    }
-  }
-}
-// El "void flashSequence()" és una funció que rep un argument
-// El que fa amb aquest argument és utilitzar un punter i seguir la seqüencia que es troba amb letters[7]
-// que és "....", aquest quatre caracters o punts són una seqüencia de caracters ordenada gracies al punter*
-// El codi següent el que fa és amb la posició 'i' inicial de 0 que és el pointer al principi de l'array "...."
-// I el que fa és que mentre (While) aquest element 'i' de la seqüencia no sigui (!) = NULL, es a dir mentres 
-// hi hagi un caracter, crida una funció diferent anomenada "flashDotOrDash" que rep com a argument el valor de 'i'
-// concret en aquella seqüencia.
-// Després de rebre'l passa el següent valor de 'i', si la 'i' era el primer ".", la i++ primera o i = i+1 és 
-// el segon punt ".". I així fins al cinquè punt que s'atura tot, perqué és NULL, es a dir, no hi ha cinquè punt.
-// El Delay serveix per deixar espai entre lletres o sequences.
-  void flashSequence(char* sequence) {
-  int i = 0;
-  while (sequence[i] != NULL) {
-    flashDotOrDash(sequence[i]);
-    i++;
-  }
-  delay(dotDelay * 3);    // gap between letters
-}
-// La funció "flashSequence" que llegeix una determinada lletra que rep com a argument, letters[7] i reconeix que 
-// està formada per "...." i crida la funció "flashDotOrDash" fins que s'acaben els punts o ratjes i deixa un espai
-// al final per indicar que és una lletra.
-// La funció "flashDorOrDash" té un parametre intern anomenat "dotOrDash". Aquesta funció sempre encen un led, i sempre
-// el deixa un temps encés o delay. En el cas que sigui una ratlla, el fa 3 vegades més llarg que un punt, gracies
-// a un condicional "if" o en cas contrari "else". No diem si és una ratlla, diem si no és un punt
-void flashDotOrDash(char dotOrDash) {
-  digitalWrite(ledPin, HIGH);
-  if (dotOrDash == '.') {
-    delay(dotDelay);           
-  }
-  else { 
-    // must be a dash 
-    delay(dotDelay * 3);           
-  }
-  digitalWrite(ledPin, LOW);    
-  delay(dotDelay); // gap between flashes
-}
-// El "loop" és un bucle i continuament crida a la funció "flashSequence" que el que fa és llegir cada lletra i convertirles
-// en punts i ratlles, aquesta funció crida a la funció "flashDotOrDash" continuament que fa que s'encenguin els leds segon
-// els punts i ratlles. Sempre hem de dividir un codi en diverses funcions, primer per fer-lo més modular i entendre que fa 
-// cada funció i a més ens fa més facil el manteniment i canvis futurs.
-
-
-<h2>Input i Output: Entrades i sortides</h2>
-<p>Les entrades i sortdes poden ser de dues maneres diferents, digitals o analògiques, les digitals poden 
-ser de 0 voltso de 3,3 volts i en altres plaques arduino, poden ser 0 volts i 5 volts. Les analògiques
-serien graduals, de 0 a 3,3 volts o 5 volts en 2**n pasos, sent "n" el número de bits.</p>
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 
-const int outPin = 3;
+//Al principi del codi, abans de la funció de configuració "setup" i  la funció principal "loop" que s'executa continuament, hem d'escriure sempre variables o constants.
+//A més, al principi dle codi trobem les constants i variables globals, anomenades així perque es poden cridar o executar des de qualsevol part del codi, a diferencia de les variables locals que es defineiexn i s'utilitzendintre de la mateixa funnció "loop" o una funció adicional.
+//Davant de les variables glbals hauriem d'afegir les biblioteques necessaries per fer funcionar el nostre codi, (amb "#include <nom_de_la_biblioteca.h>) l'extensió "h" deriva de C i sigrnifica biblioteca de headers o encapçalaments.
+                                              
+    const int ledPin = 13; 
+    const int dotDelay = 200;  // "const" vol dir que la variable no es modificarà dins del codi,"int" col dir integuer, o sigui que el nombre que agafem haurà de ser enter, ja que els pins tenen números enters. 
+                               // El pin 13 és especial, té una resitencia interna en el cas d'Arduino Uno que premet connectat directament un led, perqyè està al contat del pin GND i puc clavar o connectar un led sense cap circuit o placa
+                               // "ledPin" és una variable constant i s'anomena així per l'usuari, utilizanr camelCase i referint-nos al que fa aquest pin.
+                    
+    char* letters[] = { 
+        ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",    // A-I
+        ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.",  // J-R
+        "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."          // S-Z
+        };
+
+//Més amunt i més abaix tinc dos arrays composats cadascun d'ells per arrays interns i cada array intern està composat de caracters que nomes poden ser "." o "-".
+//Quan jo crido "letters[0]" el que jo obtinc ".-" o sigui la lletra A en codi Morse.
+//Aquesta forma de treballar és molt més dolenta, des d'un punt de vista d'eficiencia perquè estic utilitzant un byte (un byte són 8 bits) sencer per cada punt o ratlla.
+//Un bit és un valor de 0 o 1 i això es podria utilitzar per fer el punts o les ratllesperquè els puts i les ratlles són dos estats, o 0 o 1, es podria asignar el 0 al punt i la ratlla l'1, fant-ho més aficient.
+//En un byte hi han 8 bits i per això es podrin fer 256 caracters diferents.
+//Quants bytes de mamoria necesitarem utilitzant bytes o bits per codificar Morse?
+//Aproximadament el morse te 109 punts o rallespels numeros o lletres, de la manera més eficien tindriem un ús de 14 bytes i de la manera menys eficienttindriem (109/8) 14 bytes i de la manera menys eficient (109 · 8) 872 bytes. Hem de tenir en compte          
+//De fet ASCII utilitza 7 bits per crear 128 caracters (de 0 a 127 )
+//"*" és molt important, ja que ens indica que és un punter, "[]" ens indica que és un array, "numbers" m'indica el valor de l'array, i char m'indica el tipus d'element (que son caracters) que hi ha dins de l'array.
+//L'array de sota es diu numbers però està construit per caracters, perquè tant els numeros con les lletres estan construides per "." o "-" que son caracters
+                
+    char* numbers[] = {
+        "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."};
+
+// En el setup o configuració del microcontrolador indiquem que el pin 13 que ara es diu "ledPin" sigui és una sortida o "Output"
+// Indiquem a l'arduino que es comuniqui amb l'ordinador a traves del port serial o serie i comenci a una velocitat de 9600 bauds o simbols/segon que són aprox. 9600 bits/segon.
+    
+    void setup() {
+        pinMode(ledPin, OUTPUT);
+        Serial.begin(9600);
+            }
+  
+    void loop() {
+// El loop és el codi principal, i el que el seu nom indica que es repeteix sense parar en un "loop".
+// "char" signica que utilitzem una variable de tipus caracter i l'anomenem "ch".
+// "Serial.available" significa si està disponible la comunicació serie o "serial monitor" que comunica  el microcontrolador arduino amb el nostre ordinador o dispositiu.
+// La comunicació entre arduino i l'ordinador és complexa: 
+    // Primer pas: l'ordinador envia dades al monitor serie a traves de l'USB per un mecanisme que s'anomena "USB to Serial"
+    // Segon pas: la transformació anterior d'USB to Serial la fa un xip especial dintre d'Arduino.
+    // Tercer pas: les dades en format serie arriben a una part del microcontrolador anomenada UART que significa "Universal Asynchronous Receiver Transmiter"
+    // Quart pas: l'UART envia les dades que rep a una memòria temporal o "buffer" que pot enmagatzemar 128 bytes fins que s'elimina en  el moment que es llegeix -Soy Marticon -by Miguel Angel
+// La funció serial available retorna el número de bytes de dades en el "buffer" que estan esperant per ser llegits. Si no hi ha cap missatge esperant a ser llegit, la funció retorna a 0
+// La funció "Serial.read" el que fa és llegir el primer o el següent caracter disponible i l'emmagatzema a la variable "ch"
+// El símbol >= o <= s'utilitza per comparar amb el número d'ASCII que correspon per la lletra "a" per tant, podriem canviar l'a pel número 97 i la z és el número 122.
+// Els altres caracters que podem canviar serien 'A' pel número 65, Z pel número 90.
+// El caracter '0' correspon al número 48 i el caracter '9' correspon al número 57.
+// El caracter ' ' correspon al número 32.
+// Els condicionals que hi han dintre del condicional general "Serial.avaliable" el que fan és dir es que si el caracter és entre la a i la z le restes el valor -a
+// Imaginem que la primera lletra és una 'c', que equival al número 99, llavors si li restem la 'a' que és 97 quedaria un número 2.
+// El número 2 està dintre d'un ([]) és a dir, dintre d'una array i correspondria al tercer element de l'array de les lletres.
+// Aquest tercer element és "-.-."
+// Un altre exemple seria la 'H' estaria avaluat en un altre condicional, el de les mayuscules, aquest caracter equival al número 72, i li he de restar la 'A' que equival al número 65, per tant ch - 'A' és 7 que és el vuité element de l'array de majúscula [7] i letters[7] és "...." .
+// Per qué s'ha de restar?
+    // Per conexier la posició de la lletra a l'array, perquè hem possat l'array ordenat des de la 'a' fins la 'z' i des de la 'A' fins la 'Z'
+// Ara tenim el número per exemple letters[7] igual a "...." i el que volem és aplicar una funció.
+// Aquesta funció és la funció "flashSequence" que agafarà l'element vuité de l'array com a arguments 
+
+        char ch;
+            if (Serial.available() > 0) {
+                ch = Serial.read();
+                if (ch >= 'a' && ch <= 'z') {
+                    flashSequence(letters[ch - 'a']);
+                }
+                else if (ch >= 'A' && ch <= 'Z') {    
+                    flashSequence(letters[ch - 'A']);
+                }
+                else if (ch >= '0' && ch <= '9') {
+                    flashSequence(numbers[ch - '0']);
+                }
+                else if (ch == ' ') {
+                    delay(dotDelay * 4);  // gap between words  
+                }
+            }
+        }
+                
+// El "void flashSequence()" és una funció que rep un argument
+// El que fa amb aquest argument és utilitzar un punter i seguir la seqüencia que es troba amb letters[7] que és "....", aquest quatre caracters o punts són una seqüencia de caracters ordenada gracies al punter*
+// El codi següent el que fa és amb la posició 'i' inicial de 0 que és el pointer al principi de l'array "...."
+// I el que fa és que mentre (While) aquest element 'i' de la seqüencia no sigui (!) = NULL, es a dir mentres hi hagi un caracter, crida una funció diferent anomenada "flashDotOrDash" que rep com a argument el valor de 'i' concret en aquella seqüencia.
+// Després de rebre'l passa el següent valor de 'i', si la 'i' era el primer ".", la i++ primera o i = i+1 és el segon punt ".". I així fins al cinquè punt que s'atura tot, perqué és NULL, es a dir, no hi ha cinquè punt.
+// El Delay serveix per deixar espai entre lletres o sequences.
+              
+    void flashSequence(char* sequence) {
+        int i = 0;
+        while (sequence[i] != NULL) {
+            flashDotOrDash(sequence[i]);
+            i++;
+        }
+        delay(dotDelay * 3);    // gap between letters
+    }
+
+// La funció "flashSequence" que llegeix una determinada lletra que rep com a argument, letters[7] i reconeix que està formada per "...." i crida la funció "flashDotOrDash" fins que s'acaben els punts o ratjes i deixa un espai al final per indicar que és una lletra.
+// La funció "flashDorOrDash" té un parametre intern anomenat "dotOrDash". Aquesta funció sempre encen un led, i sempre el deixa un temps encés o delay. En el cas que sigui una ratlla, el fa 3 vegades més llarg que un punt, gracies a un condicional "if" o en cas contrari "else". No diem si és una ratlla, diem si no és un punt
+
+    void flashDotOrDash(char dotOrDash) {
+        digitalWrite(ledPin, HIGH);
+        if (dotOrDash == '.') {
+            delay(dotDelay);           
+        }
+        else { 
+            delay(dotDelay * 3);           
+        }
+        digitalWrite(ledPin, LOW);    
+        delay(dotDelay); // gap between flashes
+    }
+
+// El "loop" és un bucle i continuament crida a la funció "flashSequence" que el que fa és llegir cada lletra i convertirles en punts i ratlles, aquesta funció crida a la funció "flashDotOrDash" continuament que fa que s'encenguin els leds segon els punts i ratlles. Sempre hem de dividir un codi en diverses funcions, primer per fer-lo més modular i entendre que fa cada funció i a més ens fa més facil el manteniment i canvis futurs.
+
+<h2>Input i Output: Entrades i sortides</h2>
+    <p>Les entrades i sortdes poden ser de dues maneres diferents, digitals o analògiques, les digitals poden ser de 0 voltso de 3,3 volts i en altres plaques arduino, poden ser 0 volts i 5 volts. Les analògiques serien graduals, de 0 a 3,3 volts o 5 volts en 2**n pasos, sent "n" el número de bits.</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
 // pinMode és una funció predeterminada o "built-in", vol dir que està predefinida en el llenguatje
 // arduino i sempre ha de rebre 2 argument o parametres, el primer sempre ha de ser un númer enter o "int"
 // (integer) que correspon al número de pin que volem conectar (en aquet cas 3), el segon argument és el mode
 // que pot ser OUTPUT que significa sortida, o INPUT que significa entrada, també existeix INPUT_PULLUP
+    
+    const int outPin = 3;
+
+    void setup() {
+        pinMode(outPin, OUTPUT);
+        Serial.begin(9600); //Miguel Angel
+        Serial.println("Enter 1 or 0");
+    }
+
+    void loop() {
+        if (Serial.available() > 0) {
+            char ch = Serial.read();
+            if (ch == '1') {
+                digitalWrite(outPin, HIGH);
+            }
+        else if (ch == '0') {
+            digitalWrite(outPin, LOW);
+            }
+        }
+    }
+</code></pre>      
+
+<p> Quan tenim una entrada hem de possar mode input i en comptes de fer un digitalWrite que fem a les sortides hem de fer un digitalRead per obtenir l'entrada, que només pot ser un valor digital de 0 o 1 (binari).
+    Si el voltatge és menor a 2,5 volts es traduirà com un 0, en canvi si és superior com un 1</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+    const int inputPin = 5;
+
+    void setup() {
+        pinMode(inputPin, INPUT);
+        Serial.begin(9600);
+    }
+
+    void loop() {
+        int reading = digitalRead(inputPin);
+        Serial.println(reading);
+        delay(1000);
+    }
+
+</code></pre>  
+
+<p>// El pullup estabilitza la senyal que rep per a que la transcripció a binari (0 i 1) sigui correcta. Si analitzem el que
+// passa amb un oscil·loscopi (mesura les oscil·lacions de la corrent) si mirem un oscil·loscopi unveurem que hi han 
+// pujades i baixades quan premo el botó no baixa de forma ideal sinó que té alguns pics que es diuen rebots 
+// (bouncing / debouncing) en el cas de debouncing és més correcte ja que el senyal per defecte és inestable i el que fem
+// és estabilitzar-lo -> desrebotar.</p>
+                    
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+const int inputPin = 5;
+
 void setup() {
-  pinMode(outPin, OUTPUT);
-  Serial.begin(9600); //Miguel Angel
-  Serial.println("Enter 1 or 0");
+  pinMode(inputPin, INPUT_PULLUP);
+  Serial.begin(9600);
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    char ch = Serial.read();
-    if (ch == '1') {
-      digitalWrite(outPin, HIGH);
-    }
-    else if (ch == '0') {
-      digitalWrite(outPin, LOW);
-    }
-  }
+  int reading = digitalRead(inputPin);
+  Serial.println(reading);
+  delay(1000);
 }
-</code></pre>      
+</code></pre>
+                    
