@@ -681,16 +681,14 @@ flas, d'aquesta forma es com si escrivis flash (200), flash (200),flash (200), f
         delay(dotDelay); // gap between flashes
     }
 
-// El "loop" és un bucle i continuament crida a la funció "flashSequence" que el que fa és llegir cada lletra i convertirles en punts i ratlles, aquesta funció crida a la funció "flashDotOrDash" continuament que fa que s'encenguin els leds segon els punts i ratlles. Sempre hem de dividir un codi en diverses funcions, primer per fer-lo més modular i entendre que fa cada funció i a més ens fa més facil el manteniment i canvis futurs.
+// El "loop" és un bucle i continuament crida a la funció "flashSequence" que el que fa és llegir cada lletra i convertirles en punts i ratlles, aquesta funció crida a la funció "flashDotOrDash" continuament que fa que s'encenguin els leds segon els punts i ratlles. Sempre hem de dividir un codi en diverses funcions, primer per fer-lo més modular i entendre que fa cada funció i a més ens fa més facil el manteniment i canvis futurs.                                                                                                        
 
 <h2>Input i Output: Entrades i sortides</h2>
     <p>Les entrades i sortdes poden ser de dues maneres diferents, digitals o analògiques, les digitals poden ser de 0 voltso de 3,3 volts i en altres plaques arduino, poden ser 0 volts i 5 volts. Les analògiques serien graduals, de 0 a 3,3 volts o 5 volts en 2**n pasos, sent "n" el número de bits.</p>
 
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 
-// pinMode és una funció predeterminada o "built-in", vol dir que està predefinida en el llenguatje
-// arduino i sempre ha de rebre 2 argument o parametres, el primer sempre ha de ser un númer enter o "int"
-// (integer) que correspon al número de pin que volem conectar (en aquet cas 3), el segon argument és el mode
+// pinMode és una funció predeterminada o "built-in", vol dir que està predefinida en el llenguatje arduino i sempre ha de rebre 2 argument o parametres, el primer sempre ha de ser un númer enter o "int" (integer) que correspon al número de pin que volem conectar (en aquet cas 3), el segon argument és el mode
 // que pot ser OUTPUT que significa sortida, o INPUT que significa entrada, també existeix INPUT_PULLUP
     
     const int outPin = 3;
@@ -734,24 +732,93 @@ flas, d'aquesta forma es com si escrivis flash (200), flash (200),flash (200), f
 
 </code></pre>  
 
-<p>// El pullup estabilitza la senyal que rep per a que la transcripció a binari (0 i 1) sigui correcta. Si analitzem el que
-// passa amb un oscil·loscopi (mesura les oscil·lacions de la corrent) si mirem un oscil·loscopi unveurem que hi han 
-// pujades i baixades quan premo el botó no baixa de forma ideal sinó que té alguns pics que es diuen rebots 
-// (bouncing / debouncing) en el cas de debouncing és més correcte ja que el senyal per defecte és inestable i el que fem
-// és estabilitzar-lo -> desrebotar.</p>
+<p> El pull up estabilitza la senyal que rep per a que la transcripció a binari (0 i 1) sigui correcta. 
+    Si analitzem el que passa amb un oscil·loscopi (mesura les oscil·lacions de la corrent) si mirem un oscil·loscopi veurem que hi han pujades i baixades quan prenem el botó no baixa de forma ideal sinó que té alguns pics que es diuen rebots (bouncing / debouncing) en el cas de debouncing és més correcte ja que el senyal per defecte és inestable i el que fem és estabilitzar-lo -> desrebotar.</p>
                     
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-const int inputPin = 5;
 
-void setup() {
-  pinMode(inputPin, INPUT_PULLUP);
-  Serial.begin(9600);
-}
+    const int inputPin = 5;
 
-void loop() {
-  int reading = digitalRead(inputPin);
-  Serial.println(reading);
-  delay(1000);
-}
+    void setup() {
+        pinMode(inputPin, INPUT_PULLUP);
+        Serial.begin(9600);
+    }
+
+    void loop() {
+        int reading = digitalRead(inputPin);
+        Serial.println(reading);
+        delay(1000);
+    }
+
 </code></pre>
-                    
+
+<p> Negació. El signe d'admiració "!" significa negar la variable que es posa després del signe.</p>
+<p> Hi ha dos variables inicials, que son constants per definició del codi. La variable ledPin es el pin el qual conectem
+el led, que es 13 normalment. I el pin 5 es un pin on conectem un interruptor per entrada de dades</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+   
+    const int inputPin = 5;
+    const int ledPin = 13;
+   
+    void setup() {
+        pinMode(ledPin, OUTPUT);
+        pinMode(inputPin, INPUT_PULLUP);
+    }
+    void loop() {
+        int switchOpen = digitalRead(inputPin);
+        digitalWrite(ledPin, ! switchOpen);
+    }
+   
+</code></pre>
+
+<p> Clica a la imatge següent per veure la simulació </p>
+<a href = "https://www.tinkercad.com/things/6kmvYJBnQFx-circuit-54-monk" target = "_blank"> <img src = "54.PNG"> </a>
+
+<p>solució amb llibreria </p>
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    const int inputPin = 5;
+    const int ledPin = 13;
+    int ledValue = LOW;
+    
+    void setup()  {
+    pinMode(inputPin, INPUT_PULLUP);
+    pinMode(ledPin, OUTPUT);
+    }
+    
+    void loop() {
+    if (digitalRead(inputPin) == LOW) {
+     ledValue = ! ledValue;
+     digitalWrite(ledPin, ledValue);
+     delay(500);
+    }
+    }
+</code></pre>
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    #include <Bounce2.h>
+        const int inputPin = 5;
+        const int ledPin = 13;
+        int ledValue = LOW;
+        Bounce bouncer = Bounce(); 
+
+        void setup() {
+        pinMode(inputPin, INPUT_PULLUP);
+        pinMode(ledPin, OUTPUT);
+        bouncer.attach(inputPin);
+        // bouncer.interval(50); // interval in ms
+        }
+
+        void loop() {
+        if (bouncer.update() && bouncer.read() == LOW) {
+          ledValue = ! ledValue;
+          digitalWrite(ledPin, ledValue);
+        }
+        }
+ </code>
+</pre>
+
+
+
+</div>
+</body>
+</html>
