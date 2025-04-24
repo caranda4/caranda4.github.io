@@ -794,62 +794,61 @@ el led, que es 13 normalment. I el pin 5 es un pin on conectem un interruptor pe
     }
     }
 </code></pre>
-<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">  
-<p>El "contact bounce" podríem traduir-ho com a rebot de contacte, és un problema comú a diferents dispositius com per exemple interruptors mecànics, 
-  reles (interruptor que canvia la posició d'una palanca interna mitjançant electromagnestisme), contactes de bateria. Tots aquest elements
-tenen en comú que estan fets per metalls elàstics, de forma que quan jo apreto un interruptor mecànic el metall que tanca el circuit rebota 
-diverses vegades sobre el contacte, provocant una inestabilitat en el senyal.</p>
-    #include <Bounce2.h>
-        const int inputPin = 5;
-        const int ledPin = 13;
-        int ledValue = LOW;
-        Bounce bouncer = Bounce(); 
-
-        void setup() {
-            pinMode(inputPin, INPUT_PULLUP);
-            pinMode(ledPin, OUTPUT);
-            bouncer.attach(inputPin);
-        // bouncer.interval(50); // interval in ms
-        }
-
-        void loop() {
-        if (bouncer.update() && bouncer.read() == LOW) {
-          ledValue = ! ledValue;
-          digitalWrite(ledPin, ledValue);
-        }
-        }
- </code>
-</pre>
-
-<p> Algunes sortides d'arduino i altres microcontroladors són PWM (Pulse Width Modulation). Com podem veure a la imatge de sota, es tracta de una modulació de l'ample del pols. Es a dir, es modula el temps que es 0 o que es 1, aconseguint que en 0 s'apagui i en 1 s'encengui.
-Nosaltres no observem que s'encengui o que s'apagui perque es molt rapid el canvi i la nostra visió no ens permet veure-ho. Nosaltres veiem la llum en un percentatge que depen del percentatge de temps que ha estat ences la sortida </p>
-<img src = "pwm.png">
-
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-    const int outputPin = 3;
+// El 'contact bounce' podriem traduir-ho com a rebot de contacte, és un problema comú en diferents dispositius, com per exemple interruptors mecànics reles (interruptor que canvia la posició d'una palanca interna mitjançant electromagnetisme), contactes de bateria. Tots aquests elements tenen en comú que estan fets de metalls elàstics, de forma que quan jo apreto un interruptor mecànic el metall que tanca el circuit rebota diverses vegades sobre el contacte, provocant una inestabilitat en el senyal
+<img src="bouncy.png">
+// Els moviments que veiem a dalt poden ser poc importants en un circuit de potència que utilitza 220 volts a vegades no s'aprecien aquests canvis, però en un circuit de control que funciona amb un voltatge de 3.3 o 5 volts iq ue està dissenyat per entendrei resoldre senyals digitals i analògiques pot provocar que entenguin les pujades i baixades com un flux de dades
+// Com es pot evitar?  Ho podem evitar per software com veiem més avall amb una biblioteca o per hardware, que vol dir, modificar físicament els elements per reduir el rebot. Per exemple, una superfície llisa de contacte seria millor perquè donaria menys rebots, si el metall fos menys elàstic, rebotaria menys. Antigament els contactes dels interruptors en mullaven en mercuri, per evitar el rebot. També es pot afegir un flitre com un condensador, per exemple que emmagatzemaria tots els excesos de càrrega produits.
+#include <Bounce2.h> // Instal·la i inclou la llibreria <a href="https://docs.arduino.cc/libraries/bounce2/">'Bounce2.h'</a> que és compatible amb totes les plàques Arduino.
 
-    void setup() {
-        pinMode(outputPin, OUTPUT);
-        Serial.begin(9600);
-        Serial.println("Enter Volts 0 to 5");
-    }
+const int inputPin = 5; // Aquest valor és constant i correspon al interruptor
+const int ledPin = 13; // Aquest valor és constant i correspon al led
+int ledValue = LOW; // Aquest valor no és constant, però és un valor enter (integer), que per defecte, en aquest cas, té un valor inicial 0 (LOW)
+Bounce bouncer = Bounce(); 
+// La majúscula de Bounce m'indica que és una classe, i al costat de la classe poso el nom de l'objecte que tindrà totes les característiques de la classe anterior. Per exemple: Homo sapiens carla. Bounce(); escrit amb majúscules és un mètode d'una classe que s'aplica a l'objecte bounce. Aquest sistema està basat en el llenguatge C++ perquè l'autor de la biblioteca ho ha descrit així
+void setup() {
+  pinMode(inputPin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+  bouncer.attach(inputPin); // La sintaxi del punt o dot syntax és molt important perquè apliquem un mètode o una funció deinida a la classe com a un objecte concret que és bouncer. Aquesta funció attach depèn només d'un argument o paràmetre que és inpunPin. Que farà attach? L'attach lliga l'interruptor físic que està en inputPin a l'objecte bouncer que hem de controlar 
+ // bouncer.interval(50); // interval in ms
+}
 
-    void loop() {
-        if (Serial.available() > 0) {
-            float volts = Serial.parseFloat();
-            int pwmValue = volts * 255.0 / 5.0;
-            analogWrite(outputPin, pwmValue);
-        }
-    }
+void loop() {
+  if (bouncer.update() && bouncer.read() == LOW) { // linia clau perquè està comprovant si ha conviat (bouncer.update retorna verdader o true si alguna cosa ha canviat a l'objecte bouncer) i la segona mart del codi comprova si a més a més '&&'comprova si el botó de l'interruptor està apagat perquè LOW = 0
+   ledValue = ! ledValue; // Si està encés, apagat, si està apagat, encén
+   digitalWrite(ledPin, ledValue);
+  }
+}
+<h2> Sortides analógiques</h2>
+<p> Algunes sortides d'Arduino i altres microcontroladors són PMW (Pulse Width Modulation), es tracta d'una modulació de l'ample dels pols. És a dir, es modula el temps que és 0 i que es 1, aconsegueix que en 0 s'apagui i que en 1 s'encengui. Nosaltres no observem que s'encén i s'apaga, perquè és molt ràpid el canvi i la nostra visió no ens permet veure-ho. Nosaltres veiem la llum en un percentatge que depén del percentatge de temps que ha estat encés la sortida, vol dir que en comples de donar 0 i 1, poden donar molts valors intermitjos</p> 
+<img rsc= "PMWduty.jpeg">  
 </code></pre>
 
-<p> El "const int outputPin" defineix el pin de sortida constant que no es pot canviar. Després de definir el pin de sortida 3 i en output (sortida) i la velocitat bauds (9600), el codi demana que escrigui a la consola del programa Arduino IDE: Enter volts 0-5.</p>
-<p> Al loop principal comprova que hi hagi caràcters escrits a la consola, després agafa el valor que hem donat i el guarda en la variable volts. El valor pot ser en decimals perquè posa float ("Floating point number").
-El mètode parseFloat l'apliquem amb la sintaxi del punt al objecte Serial (Que es posa en majúscula, normalment seria una classe en majúscula) i agafa el valor de la consola sèrie</p>
-<p> La variable pwmValue és entera (int o "integer") i el que fa és convertir el valor de volts (0-5) a valors de 0-255, que és el numero de bits (2^8=256). Si fos un ESP32-S3 de 14 bits tal com indica el data sheet o fulla de caracteristiques de el ESP32-S3la linea de codi seria: "Serial.println("Enter Volts 0-3.3") "int pwmValue = volts * 16384.0 / 3.3" </p>
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 
-<p> El ESP32-S3 te l'avantatge de tenir més resolució, es a dir, pot donar 16384 valors diferents entre 0-3,3 volts
-Aixó pot que no es noti en un led, peró es nota en un motor, on l'ESP32 permet accedir a més velocitats diferents. </p>
-</div>
+const int outputPin = 3;
+
+void setup() {
+  pinMode(outputPin, OUTPUT);
+  Serial.begin(9600); // comença lo comunicació sèrie USB entre Arduino i l'ordinador a una velocitat de 9600 bauds (9600 símbols per segon). L'objecte Serial és de la classe serial i li apliquem amb la sintaxi del punt el mètode begin que té com a paràmetre o argument els un número sencer que correspondrà als bauds
+  Serial.println("Enter Volts 0 to 5"); // demana a l'usuari que entri per la consola o per el serial monitor de l'Arduino IDE un número entre 0 i 5. Println significa imprimeix una linea i li apliquem aen la sintaxis del punt a la classe serial pot rebre diversos paràmetres, si els posem entre comemtes s'escriuen tal qual i sinó, escriu el valor de la variable
+}
+
+void loop() { // codi rincipal que no s'atura mai, es repeteix fins que desconecto l'Arduino
+  if (Serial.available() > 0) { // El mètode Serial.available espera caràcters, major a 0 és que hi ha algún caràcter
+    float volts = Serial.parseFloat(); // parseFloat és una funció o mètode que s'aplica a l'objecte serial i la seva funció és parsejar o analitzar el contingut de caràcters que arriba pel port serial i si és de tipus decimal o floating point number (número amb coma flotant) o variable tipus float. Les variables tipus float inclouen les variable int o integer -> números sencers. També existeix parseInt que només acceptaria números enters. El float volts crea un espai a la memória de l'ordinador anomenat volts que haurà de ser del tipus floating point number que emmagatzemarà el que li arribi del port serial escrit per l'usuari. la variable volts emmagatzema el número decimal que escriu l'usuari
+    int pwmValue = volts * 255.0 / 5.0; // Els volts no ens serveixen perquè volem PWM perquè no velem valors entre 0 i 5, sinó entre 0 i 255. Perquè entre 0 i 255? per que és el número de bits (2^8 -> 256). Faig una regla de tres i multiplico el valor per 255 i divideixo entre 5. Per exemple si l'usuari inserta 2.5 tindras 2.5 * 255 / 5 = 127.5. Aquet valor es transformara en 127 perque ha de ser integer i es guardara en pwmValue.
+    analogWrite(outputPin, pwmValue);
+  }
+}
+
+<p> El "const int outputPin" defineix el pin de sortida constant que no es pot canviar. Després de defiir el pin de sortida 3 i en output (sortida) i la velocitat bauds (9600), el codi demana que escriguim a la consola del programa Arduino IDE: Entre volts 0 - 5.</p>
+<p> El loop principal comprova que hi hagi caràcters escrits a la consola, després agafa el valor que hem donat i el guarda en la variable volts. El valor por ser en decimal perquè posa float ('Floating point number'). El mètode parseFloat l'apliquem amb la sintaxi del punt a l'objecte Serial (Que es posa en  majúscula, normalment seria una classe en majúscula) i agafa el valor de la consola en sèrie. </p>
+<p> La variable pwmValue és entra (int o 'integer') i el que fa és convertir el valor volts (0-5) a valors de 0 - 255, que és el número de bits (2^14) tal i com indica el data sheet o fulla de característiques del ESP32S3. Si fos un ESP32S3 la línea de codi seria 
+    "Serial.println("enter volts 0 - 3.3")"
+    "int pmwValue = volts * 16384.0 / 3.3"</p>
+<p> El ESP32S3 té l'avantatge de tenir més resolució, és a dir, pot donar 16384 valors diferents entre 0 i 3.3 volts. Aixó potser no es noti per un led, però es nota en un motor, on l'ESP32S3 permet accedir a més velocitats diferents. Els motors poden arribar a 16 bits, que és 2^16 o 25536 valors diferents, que depenent del tipus de motor, pot ser observat o no.</p>
+</code></pre>
+                    
 </body>
 </html>
