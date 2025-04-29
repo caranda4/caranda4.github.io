@@ -6,10 +6,10 @@
     <title>Programació amb Arduino</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
-    <script src="https://brivera4pompeu.github.io/robotica/arduino/programacio/arduino.min.js"></script>
     <script>hljs.highlightAll();</script>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
@@ -400,6 +400,7 @@ void flash() {
    digitalWrite(ledPin, LOW);
    delay(delayPeriod);
 }
+      
 </code></pre>
 <p>A continuació veurem el codi flash però amb paràmetres. </p>
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
@@ -420,6 +421,8 @@ void loop() {
 // Podem veure que la funció te dos paràmetres que son 2 nombres enters i que s'anomenen "numFlashes" i "d"
 // numFlashes no esta definit com a variable global, és una variable local definida dins de la funció "flash"
 // i no te un valor predeterminat, només ha de complir que sigui un valor enter. El mateix per a la variable "d"
+
+</code></pre>
 
   <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
   void flash(int numFlashes, int d) {
@@ -849,6 +852,121 @@ void loop() { // codi rincipal que no s'atura mai, es repeteix fins que desconec
     "int pmwValue = volts * 16384.0 / 3.3"</p>
 <p> El ESP32S3 té l'avantatge de tenir més resolució, és a dir, pot donar 16384 valors diferents entre 0 i 3.3 volts. Aixó potser no es noti per un led, però es nota en un motor, on l'ESP32S3 permet accedir a més velocitats diferents. Els motors poden arribar a 16 bits, que és 2^16 o 25536 valors diferents, que depenent del tipus de motor, pot ser observat o no.</p>
 </code></pre>
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+const int analogPin = 0; // El pin 0 en Arduino és el pin A0 (analog)
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int reading = analogRead(analogPin); // analogRead llegeix els valors analogics del analogPin de 0 a 1023
+  float voltage = reading / 204.6; // 1023 / 5 = 204,6 Dividim 1023 (2^10 - 1 per a Arduino) entre 5 (volts d'Arduino)
+                        // Ara ens interesa els volts perquè jo connecto un sensor por esemple de temperatura ( de 0 a 100
+    graus, d'humitat 0% - 100%) i els valor de 0 a 1023 no tenen sentit, perquè si fos un altre ESP32 seria de 0 a 4095
+    i el valor 500 en el primer cas estaria per la meitat i en el segon cas seria menys. Si utilitzem voltatge tenim una mesura
+    real del que està passat en el sensor i buscarem la relació entre els volts i la temperatura / humitat a la fulla de 
+    característiques (datasheet), una vegada tenir la relació farem una regla de 3 o un mapejat.
+  Serial.print("Reading="); // Quan poso entre cometes el print em surt tal qual la paraula reading= que significa lectura
+  Serial.print(reading); // reading no té cometes i és una variable que conté valors entre 0 i 1023
+  Serial.print("\t\tVolts="); // \t deixa un espai de tabulador. 
+  Serial.println(voltage); // Ens donarà el valor en volts al costat de Volts=
+    // Com quedarà en el cas de reading 512?
+    // Reading=512        Volts=2.5 // espera mig segon per der una altre lectura
+    // Reading=256        Volts=1.25
+  delay(500);
+}
+
+</code></pre>
+
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+void setup() {
+  Serial.begin(9600); // comença la comunicació sèrie USB entre Arduino i l'ordinador a una velocitat de 9600 bauds (9600 símbols per segon).
+}
+
+void loop() {
+  int number = random(1, 7); // escull un número enter aleatoriament del 1 el 7. (1, 7) és un interval així que agafem el 1, 2, 3...7
+    // Els números aleatoris són importants per exemple en controls de qualitat perque  ens asegurem de tot no està decidit 
+    per ningú
+  Serial.println(number); // Perquè fem println i no fem print? perquè volem que surti una línea sobre una altre
+  delay(500); // espera 500 millisegons
+}
+    
+</code></pre>
+
+//Xi = (a * (Xi-X1) + c) mod m
+
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(0)); // seed significa llavor i té com argument un número, si per exemple poso randomSeed (4) 
+    sempre em sortirà la mateixa cadena de números aleatoris.
+}
+
+void loop() {
+  int number = random(1, 7);
+  Serial.println(number);
+  delay(500); 
+}
+</code></pre>
+<h2>Numeros aleatoris, perque son imporannts y com es fan</h2>     
+    <p> La funció random de Ardunio IDE deriva de la funció rnd del llenguatge C i C++ i fuaniona de la mateixa manera. 
+        No genera números aleatoris sinó pseudoaleatois, perque estan creats per un algorisme o algoritme, anomenat "Generador líneal congruecial". 
+        Aquet algoritme és determinista, sempre onara els mateixos resulatats.
+        La funció random necesita una llavo o seed per generar els números i sinó s'indica acostuma a ser 1 o 0, en Arduino és 1.  Donarem un exempe matematic</p>
+
+                    
+<h1>Generació de Nombres Pseudoaleatoris: LCG + Arduino</h1>
+
+  <h2>1. Algorisme LCG (Linear Congruential Generator)</h2>
+  <p>
+    L’algorisme congruencial lineal genera seqüències pseudoaleatòries segons la fórmula de recursió:
+  </p>
+  <div>
+    \[
+      X_{n+1} \;=\; \bigl(a \cdot X_n + c\bigr)\;\bmod\; m
+    \]
+  </div>
+  <p>On:</p>
+  <ul>
+    <li><strong>\(X_n\)</strong> = valor anterior.</li>
+    <li><strong>\(a\)</strong> = multiplicador.</li>
+    <li><strong>\(c\)</strong> = increment.</li>
+    <li><strong>\(m\)</strong> = mòdul.</li>
+    <li><strong>\(X_0\)</strong> = llavor inicial (seed).</li>
+  </ul>
+
+  <h3>Exemple Numèric Pas a Pas</h3>
+  <p>Suposem:</p>
+  <ul>
+    <li>\(a = 5\)</li>
+    <li>\(c = 3\)</li>
+    <li>\(m = 16\)</li>
+    <li>\(X_0 = 7\)</li>
+  </ul>
+  <ol>
+    <li>
+      \(X_1 = (5 \times 7 + 3) \bmod 16 = 38 \bmod 16 = 6\)
+    </li>
+    <li>
+      \(X_2 = (5 \times 6 + 3) \bmod 16 = 33 \bmod 16 = 1\)
+    </li>
+    <li>
+      \(X_3 = (5 \times 1 + 3) \bmod 16 = 8  \bmod 16 = 8\)
+    </li>
+    <li>
+      \(X_4 = (5 \times 8 + 3) \bmod 16 = 43 \bmod 16 = 11\)
+    </li>
+    <li>
+      \(X_5 = (5 \times 11 + 3) \bmod 16 = 58 \bmod 16 = 10\)
+    </li>
+  </ol>
+  <p><strong>Seqüència completa:</strong> 7, 6, 1, 8, 11, 10</p>
                     
 </body>
 </html>
