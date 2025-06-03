@@ -12,22 +12,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
     <script src="https://brivera4pompeu.github.io/robotica/arduino/programacio/arduino.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
-        pre { background: #f4f4f4; padding: 10px; overflow-x: auto; position: relative; }
-        code { font-family: monospace; }
-        .copy-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            color: #007bff;
-        }
-
-        body {
+      <style>
+    table {
+      width: 50%; /* Ocupa el 50% de l'amplada de la pàgina */
+      border-collapse: collapse; /* Evita que apareguin dobles línies a les cel·les */
+      margin: 20px auto; /* Marge de 20px a la part superior i centra la taula */
+    }
+    th, td {
+      border: 1px solid #ddd; /* Afegir una vora fina d'un píxel de color gris clar */
+      padding: 10px; /* Espai intern dins de cada cel·la */
+      text-align: center; /* Centrar el text dins de cada cel·la */
+    }
+    thead {
+      background: #f4f4f4; /* Canvia el color del fons del thead a gris clar */
+      font-weight: bold; /* Fa que la capçalera de la taula estigui en negreta */
+    }
+    tbody tr:nth-child(even) { /* Pseudoclasse per a files parells */
+      background-color: #f9f9f9;
+    }
+    tbody tr:hover { /* Pseudoclasse hover per a files */
+      background-color: #e2e2e2;
+    }
+    body {
     padding: 0; /* Elimina l'espai extra al voltant del cos */
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -54,8 +60,9 @@
             margin-left: 2px;
             margin-right: 2px; /* Marges laterals ajustats */
             margin-top: 2px; /* Afegeix espai superior entre el contingut i la barra de menú */
+    }
     </style>
-    </head>
+</head>
 <body>
     <!-- Barra de navegació -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -78,7 +85,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://caranda4.github.io/robotica/coldplay">Projecte Coldplay</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">Braç robòtic</a>
@@ -95,10 +101,17 @@
               <a class="dropdown-item" href="https://caranda4.github.io/robotica/arduino/configuracio">Configurció</a>
               <a class="dropdown-item" href="https://caranda4.github.io/robotica/arduino/programacio">Programació</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://caranda4.github.io/robotica/pc517">pc517</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://caranda4.github.io/robotica/projecte">Projecte Música</a>
+            </li>
         </ul>
       </div>
     </div>
   </nav>
+
     <script>
         function copyCode(button) {
             const codeBlock = button.nextElementSibling.innerText;
