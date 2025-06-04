@@ -117,6 +117,7 @@
             <li>Una senyal cap a l’altaveu, que emet un to durant uns segons, generant una alarma sonora.</li>
         </ul>
         <p>Tot el circuit s’ha muntat sobre una placa de proves, i s’ha programat l’Arduino amb l’entorn Arduino IDE, aplicant lògica condicional i control del temps amb delay().</p>
+        <p>Per poder fer aquest circuit nececitem els seguents components:</p>
         <ul.n>
             <li><a href="https://store.arduino.cc/products/arduino-uno-rev3?queryID=undefined">Arduino UNO Rev3</a></li>
             <li><a href="https://store.arduino.cc/products/arduino-education-shield?srsltid=AfmBOor4FenLusSyOkwAXiEOyEy1e_LMSDkNf07gr1hZQ5yxxo4ApeGw">Arduino Education Shield</a></li>
@@ -140,12 +141,11 @@
         <p></p>
         <p>Aquí teniu el codi que hem utilitzat:</p>
         
-    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-    #include <Adafruit_NeoPixel.h>
-    #include <SD.h>
-    #include <TMRpcm.h>
-    #include <SPI.h>
-
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+#include <Adafruit_NeoPixel.h>
+#include <SD.h>
+#include <TMRpcm.h>
+#include <SPI.h>
 
 // Pines
 const int PIN_TRIG = 7;
@@ -154,31 +154,25 @@ const int PIN_BUZZER = 9;
 const int PIN_LED = 5;
 const int PIN_SD = 4;
 
-
 // Objeto para el audio
 TMRpcm audio;
 Adafruit_NeoPixel tira = Adafruit_NeoPixel(4, PIN_LED, NEO_GRB + NEO_KHZ800);
-
 
 // Configuraci�ón de distancia
 const int DISTANCIA_UMBRAL = 20;
 const unsigned long TIEMPO_SIN_DETECCION = 1000;
 
-
 bool alarmaActiva = false;
 unsigned long tiempoUltimaDeteccion = 0;
 int ledActual = 0;
-
 
 void setup() {
   Serial.begin(9600);
   pinMode(PIN_TRIG, OUTPUT);
   pinMode(PIN_ECHO, INPUT);
 
-
   tira.begin();
   tira.show(); // Apagar todos los LEDs
-
 
   // Inicializar SD
   if (!SD.begin(PIN_SD)) {
@@ -186,12 +180,10 @@ void setup() {
     return;
   }
 
-
   audio.speakerPin = PIN_BUZZER;
   audio.setVolume(6); // Volumen de 0 a 7
   Serial.println("Listo");
 }
-
 
 void loop() {
   long duracion, distancia;
@@ -201,20 +193,16 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(PIN_TRIG, LOW);
 
-
   duracion = pulseIn(PIN_ECHO, HIGH);
   distancia = duracion * 0.034 / 2;
 
-
   if (distancia > 0 && distancia <= DISTANCIA_UMBRAL) {
     tiempoUltimaDeteccion = millis();
-
 
     if (!alarmaActiva) {
       audio.play("alarma.wav");
       alarmaActiva = true;
     }
-
 
     // Animación LED (uno a uno en rojo)
     tira.clear();
@@ -222,7 +210,6 @@ void loop() {
     tira.show();
     ledActual = (ledActual + 1) % tira.numPixels();
     delay(100);
-
 
   } else if (alarmaActiva && (millis() - tiempoUltimaDeteccion > TIEMPO_SIN_DETECCION)) {
     audio.stopPlayback();     // Detener el audio
