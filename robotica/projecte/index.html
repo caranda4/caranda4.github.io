@@ -110,16 +110,148 @@
 
 <h1>Projecte de final de curs</h1>
         <h2>Creació d'una alarma amb arduino</h2>
-        <p>Amb tots els coneixements adquirits durant el curs, hem pogut fer el nostre propi circuit d'arduino (amb codi onclòs) que ens ha servit per 
-        crear <b>una alarma intel·ligent</b>. En aquest projecte hem utilitzat:</p>
+        <p>Durant aquesta pràctica hem desenvolupat un sistema d’ <b>una alarma intel·ligent alarma</b> de proximitat utilitzant una placa <b>Arduino UNO</b> i diversos components electrònics bàsics. L’objectiu principal del projecte ha estat detectar la presència d’un objecte proper mitjançant un <b>sensor ulrasònic</b>, i com a resposta, activar una alarma visual (amb una tira de LED) i sonora (amb un altaveu).</p>
+        <p>El sistema es basa en l’ús del sensor ultrasònic HC-SR04, que permet mesurar distàncies en temps real. Quan un objecte s’aproxima a menys de 20 cm, l’Arduino activa dues sortides:</p>
         <ul>
+            <li>Una senyal que encén una tira de LED a través d’un transistor NPN, ja que la tira necessita més corrent del que pot oferir directament l’Arduino.</li>
+            <li>Una senyal cap a l’altaveu, que emet un to durant uns segons, generant una alarma sonora.</li>
+        </ul>
+        <p>Tot el circuit s’ha muntat sobre una placa de proves, i s’ha programat l’Arduino amb l’entorn Arduino IDE, aplicant lògica condicional i control del temps amb delay().</p>
+        <ul.n>
             <li><a href="https://store.arduino.cc/products/arduino-uno-rev3?queryID=undefined">Arduino UNO Rev3</a></li>
             <li><a href="https://store.arduino.cc/products/arduino-education-shield?srsltid=AfmBOor4FenLusSyOkwAXiEOyEy1e_LMSDkNf07gr1hZQ5yxxo4ApeGw">Arduino Education Shield</a></li>
             <li><a href="https://www.electrocomponentes.es/ceramicos/76-condensador-ceramico-100pf-50v.html">Mini condensador ceramico de 100pf</a></li>
             <li><a href="https://www.amazon.es/AZDelivery-Jumper-Arduino-Raspberry-Breadboard/dp/B07KKJ69DV/ref=sr_1_7?dib=eyJ2IjoiMSJ9.o80XcNPCmh-uXtYZ6DUZjv5MjNwuVImiVg7mCDyRGHQ0NAa20-0KaLUkiMw7lVUK46mCoi8D60oJsGLYX8B5LV_rA-DdvXcfPiLsl4y3ijxYi2U4UE8glsriWDI3CvECDbycMVE93ysSd0fuf2P8pN04QD84OhzpgKKNJvtYVmeMeIOJJzmlWsnUH-Rguk6AfuqbNOlaoDEpwz0g_tEctJZ3WXc11eoA8SnRPxEzdAV-gbO0r2uLyKe6-SZAfr8Xnv49pi0Nh1JYFomYITxGIl68Z4bj-0h3k47EwEfYo1g.nlcU-mLeVCor3H2fjHormgqr0Y-5uAPGXkoClSL3uBc&dib_tag=se&keywords=jumper%2Bmacho%2Bmacho&qid=1748937941&sr=8-7&th=1">Cable Jumper macho-macho</a></li>
             <li><a href="https://tienda.bricogeek.com/varios/590-altavoz-5cm-8-ohm-05w.html?srsltid=AfmBOoo8H2XVdwsKExSGaahqmLTqh3zTVw0sSkEeNXtei2AKOF0Qr65j">Altavoz 5cm 8 Ohm - 0.5W</a></li>
             <li><a href="https://tienda.bricogeek.com/led-neopixel/2006-tira-led-rgb-ws2812-5v-ip67-60-ledsmetro-1-metro.html">Tira LED Adafruit</a></li>
+            <li><a href="https://tienda.bricogeek.com/sensores-distancia/741-sensor-de-distancia-por-ultrasonidos-hc-sr04.html?srsltid=AfmBOoqim8vc-kLURqL_XG66X3Vj5NplQnXPcpdz6HLoFirenz7pcywt">Sensor de distancia por ultrasonidos HC-SR04</a></li>
+            <li><a href="https://www.electrocomponentes.es/fijas/32-resistencia-220-ohm-025w.html">Resistència de 220 &ohm</a></li>
+            <li><a href="https://www.pccomponentes.com/intenso-tarjeta-micro-sd-sdhc-uhs-i-16gb-clase-10">Tarjeta Micro SD de 16 GB</a></li>
+            <li><a href="https://ecastro4.github.io/robotica/projecte/alarma.wav" download="alarma.wav">Àudio d'alarma en format wav</a></li>
+            <li><a href="https://www.amazon.es/Movilideas-Prototipo-Protoboard-Contactos-Breadboard/dp/B0BDYWKC9H/ref=sr_1_7?dib=eyJ2IjoiMSJ9.Fn5Al_rDDaa8z_5j7EII9K5Dj90jQRJ3bxcusfhxfPEM2B_DP8sN08PVOnRNb5S3Xrw2BDV0r3gbq59r5VnCz3AnUy98C1ys3Do67-_sxAwsl0WGRBmZrxk1nCW5CTF-YXXIIS3cPRd-XCnarwVh3KmGC2HcOEhctLNlXnATv2bNm9pGAHeWCOocLuqPOGaVW528gjFZLM-aCxnLg2A3vhuK3Cp7b9-eZMkzqs3a1J7Vdi4GABtCSWjT7flggfK2NcmINv2xKfDG15lq2saMuo0wBNgvrnAhKAdgADOmJDg.pmo3EEDW1CQXXwxfb113aXGkuugDWhlO1LGIOFW2tOU&dib_tag=se&keywords=protoboard&qid=1748993726&sr=8-7&tag=offa01-20&th=1">Protoboard (molt recomenable)</a></li>
+        </ul.n>
 
+    <p></p>
+        <iframe width="800" height="500" src="https://www.tinkercad.com/embed/5YYTgQ7BGJ5?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    <p></p>
+        
+        <img src="circuito.png" width="800" height="500" >
+        <p></p>
+        <p></p>
+        <p>Aquí teniu el codi que hem utilitzat:</p>
+        
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    #include <Adafruit_NeoPixel.h>
+    #include <SD.h>
+    #include <TMRpcm.h>
+    #include <SPI.h>
+
+
+// Pines
+const int PIN_TRIG = 7;
+const int PIN_ECHO = 6;
+const int PIN_BUZZER = 9;
+const int PIN_LED = 5;
+const int PIN_SD = 4;
+
+
+// Objeto para el audio
+TMRpcm audio;
+Adafruit_NeoPixel tira = Adafruit_NeoPixel(4, PIN_LED, NEO_GRB + NEO_KHZ800);
+
+
+// Configuraci�ón de distancia
+const int DISTANCIA_UMBRAL = 20;
+const unsigned long TIEMPO_SIN_DETECCION = 1000;
+
+
+bool alarmaActiva = false;
+unsigned long tiempoUltimaDeteccion = 0;
+int ledActual = 0;
+
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PIN_TRIG, OUTPUT);
+  pinMode(PIN_ECHO, INPUT);
+
+
+  tira.begin();
+  tira.show(); // Apagar todos los LEDs
+
+
+  // Inicializar SD
+  if (!SD.begin(PIN_SD)) {
+    Serial.println("Error al iniciar SD");
+    return;
+  }
+
+
+  audio.speakerPin = PIN_BUZZER;
+  audio.setVolume(6); // Volumen de 0 a 7
+  Serial.println("Listo");
+}
+
+
+void loop() {
+  long duracion, distancia;
+  digitalWrite(PIN_TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(PIN_TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(PIN_TRIG, LOW);
+
+
+  duracion = pulseIn(PIN_ECHO, HIGH);
+  distancia = duracion * 0.034 / 2;
+
+
+  if (distancia > 0 && distancia <= DISTANCIA_UMBRAL) {
+    tiempoUltimaDeteccion = millis();
+
+
+    if (!alarmaActiva) {
+      audio.play("alarma.wav");
+      alarmaActiva = true;
+    }
+
+
+    // Animación LED (uno a uno en rojo)
+    tira.clear();
+    tira.setPixelColor(ledActual, tira.Color(255, 0, 0));
+    tira.show();
+    ledActual = (ledActual + 1) % tira.numPixels();
+    delay(100);
+
+
+  } else if (alarmaActiva && (millis() - tiempoUltimaDeteccion > TIEMPO_SIN_DETECCION)) {
+    audio.stopPlayback();     // Detener el audio
+    tira.clear();             // Apagar LEDs
+    tira.show();
+    alarmaActiva = false;
+  }
+}
+</code></pre>
+    <div class="videoContainer">
+         <h4>Projecte funcionant</h4>
+        <div id="videoContainer">
+            <video id="videoPlayer" width="640" height="320" controls>
+                <source src="circuito.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+        </div>
+    </div>
+
+
+
+      
+    </div>
+    <script>
+        audioPlayer.addEventListener('ended', () => {
+          const videoPlayer = document.getElementById('videoPlayer');
+          videoPlayer.play();
+        });
+    </script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
