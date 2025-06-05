@@ -114,52 +114,56 @@
   </nav>
 
 <h1>Projecte de final de curs</h1>
-<p></p>
         <h2>Creació d'una alarma amb arduino</h2>
-        <p></p>
-        <p>Durant aquesta pràctica hem desenvolupat un sistema d’ <b>una alarma intel·ligent alarma</b> de proximitat utilitzant una placa <b>Arduino UNO</b> i diversos components electrònics bàsics. L’objectiu principal del projecte ha estat detectar la presència d’un objecte proper mitjançant un <b>sensor ulrasònic</b>, i com a resposta, activar una alarma visual (amb una tira de LED) i sonora (amb un altaveu).</p>
-        <p></p>
+        <p>Amb tots els coneixements adquirits durant el curs, hem pogut fer el nostre propi circuit d'arduino (amb codi onclòs) que ens ha servit per 
+        crear <b>una alarma intel·ligent</b>.</p>
+        <p>L’objectiu principal del projecte era detectar la presència d’un objecte proper mitjançant un <b>sensor ulrasònic</b>, i com a resposta, activar una alarma visual (amb una tira de LED) i sonora (amb un altaveu).</p>
         <p>El sistema es basa en l’ús del sensor ultrasònic HC-SR04, que permet mesurar distàncies en temps real. Quan un objecte s’aproxima a menys de 20 cm, l’Arduino activa dues sortides:</p>
         <ul>
-            <li>Una senyal que encén una tira de LED a través d’un transistor NPN, ja que la tira necessita més corrent del que pot oferir directament l’Arduino.</li>
-            <li>Una senyal cap a l’altaveu, que emet un to durant uns segons, generant una alarma sonora.</li>
+            <li>Una senyal que encén una tira de LED de color vermell que la pots modificar perquè s'encenguin més o menys LEDs.</li>
+            <li>Una senyal cap a l’altaveu, que reprodueix un àudio durant uns segons, generant una alarma sonora.</li>
         </ul>
-        <p>Tot el circuit s’ha muntat sobre una placa de proves, i s’ha programat l’Arduino amb l’entorn Arduino IDE, aplicant lògica condicional i control del temps amb delay().</p>
-        <p></p>
-        <h4>Components:</h4>
-        <ul>
+        <p>Tot el circuit s’ha muntat sobre una protoboard, i s’ha programat l’Arduino amb l’entorn Arduino IDE, aplicant lògica condicional i control del temps amb delay().</p>
+        <h4>En aquest projecte hem utilitzat els següents components:</h4>
+        <ul.n>
             <li><a href="https://store.arduino.cc/products/arduino-uno-rev3?queryID=undefined">Arduino UNO Rev3</a></li>
             <li><a href="https://store.arduino.cc/products/arduino-education-shield?srsltid=AfmBOor4FenLusSyOkwAXiEOyEy1e_LMSDkNf07gr1hZQ5yxxo4ApeGw">Arduino Education Shield</a></li>
-            <li><a href="https://www.electrocomponentes.es/ceramicos/76-condensador-ceramico-100pf-50v.html">Mini condensador ceramico de 100pf</a></li>
-            <li><a href="https://www.amazon.es/AZDelivery-Jumper-Arduino-Raspberry-Breadboard/dp/B07KKJ69DV/ref=sr_1_7?dib=eyJ2IjoiMSJ9.o80XcNPCmh-uXtYZ6DUZjv5MjNwuVImiVg7mCDyRGHQ0NAa20-0KaLUkiMw7lVUK46mCoi8D60oJsGLYX8B5LV_rA-DdvXcfPiLsl4y3ijxYi2U4UE8glsriWDI3CvECDbycMVE93ysSd0fuf2P8pN04QD84OhzpgKKNJvtYVmeMeIOJJzmlWsnUH-Rguk6AfuqbNOlaoDEpwz0g_tEctJZ3WXc11eoA8SnRPxEzdAV-gbO0r2uLyKe6-SZAfr8Xnv49pi0Nh1JYFomYITxGIl68Z4bj-0h3k47EwEfYo1g.nlcU-mLeVCor3H2fjHormgqr0Y-5uAPGXkoClSL3uBc&dib_tag=se&keywords=jumper%2Bmacho%2Bmacho&qid=1748937941&sr=8-7&th=1">Cable Jumper macho-macho</a></li>
-            <li><a href="https://tienda.bricogeek.com/varios/590-altavoz-5cm-8-ohm-05w.html?srsltid=AfmBOoo8H2XVdwsKExSGaahqmLTqh3zTVw0sSkEeNXtei2AKOF0Qr65j">Altavoz 5cm 8 Ohm - 0.5W</a></li>
+            <li><a href="https://www.electrocomponentes.es/ceramicos/76-condensador-ceramico-100pf-50v.html">Mini condensador ceràmic de 100pf</a></li>
+            <li><a href="https://www.amazon.es/AZDelivery-Jumper-Arduino-Raspberry-Breadboard/dp/B07KKJ69DV/ref=sr_1_7?dib=eyJ2IjoiMSJ9.o80XcNPCmh-uXtYZ6DUZjv5MjNwuVImiVg7mCDyRGHQ0NAa20-0KaLUkiMw7lVUK46mCoi8D60oJsGLYX8B5LV_rA-DdvXcfPiLsl4y3ijxYi2U4UE8glsriWDI3CvECDbycMVE93ysSd0fuf2P8pN04QD84OhzpgKKNJvtYVmeMeIOJJzmlWsnUH-Rguk6AfuqbNOlaoDEpwz0g_tEctJZ3WXc11eoA8SnRPxEzdAV-gbO0r2uLyKe6-SZAfr8Xnv49pi0Nh1JYFomYITxGIl68Z4bj-0h3k47EwEfYo1g.nlcU-mLeVCor3H2fjHormgqr0Y-5uAPGXkoClSL3uBc&dib_tag=se&keywords=jumper%2Bmacho%2Bmacho&qid=1748937941&sr=8-7&th=1">Cable Jumper mascle-mascle</a></li>
+            <li><a href="https://tienda.bricogeek.com/varios/590-altavoz-5cm-8-ohm-05w.html?srsltid=AfmBOoo8H2XVdwsKExSGaahqmLTqh3zTVw0sSkEeNXtei2AKOF0Qr65j">Altaveu 5cm 8 Ohm - 0.5W</a></li>
             <li><a href="https://tienda.bricogeek.com/led-neopixel/2006-tira-led-rgb-ws2812-5v-ip67-60-ledsmetro-1-metro.html">Tira LED Adafruit</a></li>
-            <li><a href="https://tienda.bricogeek.com/sensores-distancia/741-sensor-de-distancia-por-ultrasonidos-hc-sr04.html?srsltid=AfmBOoqim8vc-kLURqL_XG66X3Vj5NplQnXPcpdz6HLoFirenz7pcywt">Sensor de distancia por ultrasonidos HC-SR04</a></li>
+            <li><a href="https://tienda.bricogeek.com/sensores-distancia/741-sensor-de-distancia-por-ultrasonidos-hc-sr04.html?srsltid=AfmBOoqim8vc-kLURqL_XG66X3Vj5NplQnXPcpdz6HLoFirenz7pcywt">Sensor de distància per ultraso HC-SR04</a></li>
             <li><a href="https://www.electrocomponentes.es/fijas/32-resistencia-220-ohm-025w.html">Resistència de 220 &ohm</a></li>
             <li><a href="https://www.pccomponentes.com/intenso-tarjeta-micro-sd-sdhc-uhs-i-16gb-clase-10">Tarjeta Micro SD de 16 GB</a></li>
             <li><a href="https://ecastro4.github.io/robotica/projecte/alarma.wav" download="alarma.wav">Àudio d'alarma en format wav</a></li>
             <li><a href="https://www.amazon.es/Movilideas-Prototipo-Protoboard-Contactos-Breadboard/dp/B0BDYWKC9H/ref=sr_1_7?dib=eyJ2IjoiMSJ9.Fn5Al_rDDaa8z_5j7EII9K5Dj90jQRJ3bxcusfhxfPEM2B_DP8sN08PVOnRNb5S3Xrw2BDV0r3gbq59r5VnCz3AnUy98C1ys3Do67-_sxAwsl0WGRBmZrxk1nCW5CTF-YXXIIS3cPRd-XCnarwVh3KmGC2HcOEhctLNlXnATv2bNm9pGAHeWCOocLuqPOGaVW528gjFZLM-aCxnLg2A3vhuK3Cp7b9-eZMkzqs3a1J7Vdi4GABtCSWjT7flggfK2NcmINv2xKfDG15lq2saMuo0wBNgvrnAhKAdgADOmJDg.pmo3EEDW1CQXXwxfb113aXGkuugDWhlO1LGIOFW2tOU&dib_tag=se&keywords=protoboard&qid=1748993726&sr=8-7&tag=offa01-20&th=1">Protoboard (molt recomenable)</a></li>
-        </ul>
-    <p></p>
-    <h4>Què hem fet?</h4>
+        </ul.n>
+        <p></p>
+        <p></p>
+
+         <h4>Què hem fet?</h4>
     <ul>
         <li>Connexió i prova del sensor ultrasònic per llegir distàncies correctament.</li>
-        <li>Implementació del codi que mesura la distància i activa l’alarma si és inferior al llindar.</li>
-        <li>Ús d’un transistor com a interruptor per controlar la tira de LED.</li>
-        <li>Intent d’integració d’una targeta SD amb música</li>
+        <li>Implementació del codi que mesura la distància i activa l’alarma si és inferior a la distància programada (20 cm)</li>
+        <li>Integració d’una targeta SD amb un àudio personalitzat.</li>
         <li>Integració de tots els components en un circuit funcional.</li>
-        <li>Verificació i proves per ajustar sensibilitat, distància d’activació i durada de l’alarma.</li>
+        <li>Verificació i proves per ajustar sensibilitat, distància d’activació i sons de l'altaveu</li>
     </ul>
+    <p></p>
     <p></p>
     <h4>Problemes trobats</h4>
     <p>Durant el desenvolupament, han sorgit diversos reptes que hem hagut de resoldre:</p>
     <ul>
         <li><b>Errors en les connexions del sensor ultrasònic:</b> Al principi vam confondre els pins Trig i Echo, cosa que impedia detectar correctament les distàncies.</li>
         <li><b>Problemes amb la targeta SD:</b> Vam intentar fer servir una targeta SD amb música perquè l’altaveu reproduís sons reals, però no vam aconseguir que l’Arduino llegís correctament els arxius de la SD. Al final vam mirar el datasheet de la placa shiel i  vam trobar l'error</li>
+        <li><b>Problemes amb la tira LED:</b> No vam tenir en compte que necessitavem un condensador perquè funciones, al moment que ho vam implementar va funcionar tot.</li>
+        <li><b>problemes amb el codi:</b>Ens va passar que els codis per separat de reproduccio de targeta i il·luminacio de la tira LED funcionaven bé, però si els juntàvem no funcionaven. Finalment ho vam poder resoldre a base de proves.</li>
     </ul>
-    <p></p>
+        
+
+<p></p>
         <iframe width="800" height="500" src="https://www.tinkercad.com/embed/5YYTgQ7BGJ5?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-    <p></p>
+<p></p>
         
         <img src="circuito.png" width="800" height="500" >
         <p></p>
@@ -172,6 +176,7 @@
 #include <TMRpcm.h>
 #include <SPI.h>
 
+
 // Pines
 const int PIN_TRIG = 7;
 const int PIN_ECHO = 6;
@@ -179,25 +184,31 @@ const int PIN_BUZZER = 9;
 const int PIN_LED = 5;
 const int PIN_SD = 4;
 
+
 // Objeto para el audio
 TMRpcm audio;
 Adafruit_NeoPixel tira = Adafruit_NeoPixel(4, PIN_LED, NEO_GRB + NEO_KHZ800);
 
-// Configuración de distancia
+
+// Configuraci�ón de distancia
 const int DISTANCIA_UMBRAL = 20;
 const unsigned long TIEMPO_SIN_DETECCION = 1000;
+
 
 bool alarmaActiva = false;
 unsigned long tiempoUltimaDeteccion = 0;
 int ledActual = 0;
+
 
 void setup() {
   Serial.begin(9600);
   pinMode(PIN_TRIG, OUTPUT);
   pinMode(PIN_ECHO, INPUT);
 
+
   tira.begin();
   tira.show(); // Apagar todos los LEDs
+
 
   // Inicializar SD
   if (!SD.begin(PIN_SD)) {
@@ -205,10 +216,12 @@ void setup() {
     return;
   }
 
+
   audio.speakerPin = PIN_BUZZER;
   audio.setVolume(6); // Volumen de 0 a 7
   Serial.println("Listo");
 }
+
 
 void loop() {
   long duracion, distancia;
@@ -218,16 +231,20 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(PIN_TRIG, LOW);
 
+
   duracion = pulseIn(PIN_ECHO, HIGH);
   distancia = duracion * 0.034 / 2;
 
+
   if (distancia > 0 && distancia <= DISTANCIA_UMBRAL) {
     tiempoUltimaDeteccion = millis();
+
 
     if (!alarmaActiva) {
       audio.play("alarma.wav");
       alarmaActiva = true;
     }
+
 
     // Animación LED (uno a uno en rojo)
     tira.clear();
@@ -235,6 +252,7 @@ void loop() {
     tira.show();
     ledActual = (ledActual + 1) % tira.numPixels();
     delay(100);
+
 
   } else if (alarmaActiva && (millis() - tiempoUltimaDeteccion > TIEMPO_SIN_DETECCION)) {
     audio.stopPlayback();     // Detener el audio
@@ -249,7 +267,7 @@ void loop() {
         <div id="videoContainer">
             <video id="videoPlayer" width="640" height="320" controls>
                 <source src="circuito.mp4" type="video/mp4">
-                Tu navegador no soporta la reproducción de videos.
+               Tu navegador no soporta la reproducción de videos.
             </video>
         </div>
     </div>
