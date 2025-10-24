@@ -1,166 +1,236 @@
-   
-        /* Global styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+/* ===== Estilo minimalista cálido con tonos marrones pastel (versión mejorada) ===== */
 
-        h2 {
-            text-align: center;
-            margin: 20px 0;
-            color: #2c3e50;
-        }
+/* Global styles */
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background-color: #f5f1eb; /* Beige cálido */
+    color: #3e2f25; /* Marrón suave */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-        /* Container */
-        #quiz-container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
+header {
+    background: linear-gradient(135deg, #eaddcf 0%, #d9c4ac 100%);
+    color: #2d1f15;
+    padding: 28px 20px;
+    text-align: center;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0 4px 15px rgba(77, 55, 32, 0.1);
+    margin-bottom: 30px;
+}
 
-        /* Labels and select boxes */
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-            margin-top: 20px;
-            color: #34495e;
-        }
+/* Título dentro del header */
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+    color: #2d1f15;
+}
 
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #ecf0f1;
-            font-size: 16px;
-        }
+header p {
+    font-size: 16px;
+    color: #5a4534;
+    margin-top: 8px;
+}
 
-        /* Question and answer styling */
-        p {
-            margin: 10px 0;
-            font-size: 16px;
-        }
+/* Opcional: un sutil divisor decorativo */
+header::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #b9935a;
+    margin: 16px auto 0;
+    border-radius: 2px;
+}
 
-        strong {
-            color: #2c3e50;
-        }
+/* Ahora los h2 y labels no necesitan fondo, ya que el header los reemplaza */
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #2d1f15;
+    font-weight: 600;
+}
 
-        ul {
-            padding: 0;
-            list-style: none;
-        }
+/* Contenedor principal */
+#quiz-container {
+    max-width: 700px;
+    margin: 30px auto;
+    background: #fffaf5; /* Fondo crema */
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(77, 55, 32, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        li {
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-        }
+#quiz-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(77, 55, 32, 0.12);
+}
 
-        .option-letter {
-            font-weight: bold;
-            margin-right: 10px;
-        }
+/* Labels */
+label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    color: #4b3a2f;
+    padding: 8px 12px;
+}
 
-        li button {
-            flex-grow: 1;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
+/* Select */
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6c9b9;
+    border-radius: 12px;
+    background-color: #f2ebe5;
+    font-size: 15px;
+    color: #3e2f25;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+}
 
-        li button:hover {
-            background-color: #2980b9;
-        }
+select:focus {
+    border-color: #b9935a;
+    box-shadow: 0 0 0 3px rgba(185, 147, 90, 0.25);
+    outline: none;
+}
 
-        .correcta {
-            background-color: transparent;
-            padding: 10px;
-            border-radius: 4px;
-            color: green;
-        }
+/* Preguntas y texto */
+p {
+    margin: 12px 0;
+    font-size: 16px;
+    color: #4a3b2f;
+}
 
-        .incorrecta {
-            background-color: transparent;
-            padding: 10px;
-            border-radius: 4px;
-            color: red;
-        }
+strong {
+    color: #2d1f15;
+}
 
-        .solution-button {
-            width: 100%;
-            background-color: #e67e22;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
+/* Opciones */
+ul {
+    padding: 0;
+    list-style: none;
+}
 
-        .solution-button:hover {
-            background-color: #d35400;
-        }
+li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
 
-        .ocult {
-            display: none;
-        }
+.option-letter {
+    font-weight: 600;
+    margin-right: 10px;
+    color: #7a5e46;
+}
 
-        .visible {
-            display: block;
-        }
+/* Botones de opciones */
+li button {
+    flex-grow: 1;
+    background-color: #c6a582; /* Marrón pastel claro */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+}
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            #quiz-container {
-                padding: 15px;
-            }
+li button:hover {
+    background-color: #b48b68;
+    transform: scale(1.02);
+}
 
-            li button,
-            .solution-button {
-                font-size: 14px;
-                padding: 8px;
-            }
+li button:active {
+    transform: scale(0.98);
+}
 
-            select {
-                font-size: 14px;
-                padding: 8px;
-            }
-        }
+/* Mensajes de respuesta */
+.correcta {
+    color: #4caf50;
+    font-weight: 600;
+    margin-top: 8px;
+}
 
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 24px;
-            }
+.incorrecta {
+    color: #d9534f;
+    font-weight: 600;
+    margin-top: 8px;
+}
 
-            li button,
-            .solution-button {
-                font-size: 12px;
-                padding: 6px;
-            }
+/* Botón de solución */
+.solution-button {
+    width: 100%;
+    background-color: #a1744b; /* Marrón más intenso */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 24px;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+}
 
-            select {
-                font-size: 12px;
-                padding: 6px;
-            }
+.solution-button:hover {
+    background-color: #8d623c;
+    transform: scale(1.02);
+}
 
-            #quiz-container {
-                padding: 10px;
-            }
-        }
-    
+/* Mostrar/ocultar */
+.ocult {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #quiz-container {
+        padding: 20px;
+    }
+
+    li button,
+    .solution-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    select {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 22px;
+        padding: 12px;
+    }
+
+    li button,
+    .solution-button {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    select {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    #quiz-container {
+        padding: 16px;
+    }
+}
