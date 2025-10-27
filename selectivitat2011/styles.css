@@ -93,6 +93,7 @@ select {
     color: #3e2f25;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     appearance: none;
+    margin: 12px;
 }
 
 select:focus {
