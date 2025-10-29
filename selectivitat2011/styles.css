@@ -71,7 +71,7 @@ p {
 }
 
 strong {
-    color: #5e4b3b;
+    color: #937155;
     transition: color 0.4s ease;
 }
 
@@ -242,4 +242,3 @@ body.dark-mode .dark-toggle:hover {
     select { font-size: 12px; padding: 8px; }
     #quiz-container { padding: 14px; }
 }
-
