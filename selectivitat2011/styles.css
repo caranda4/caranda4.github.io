@@ -29,7 +29,7 @@ h2 {
 
 /* ===== QUIZ CONTAINER ===== */
 #quiz-container {
-    max-width: 800px;
+    max-width: 90%;
     margin: 20px auto;
     background: #fffaf3;
     padding: 25px;
