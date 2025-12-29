@@ -1,4 +1,82 @@
 const questions = [
+    //Serie 1
+    //Qüestio 1
+    {
+        type: "questions", 
+        category: "organitzacio",
+        text: `En el procés de fabricació d’un producte, s’estableixen quatre punts de control de qualitat, un dels quals és al final del procés, en què es retiren les peces defectuoses. D’un lot inicial de  800 peces, la taxa mitjana de rebuig de cada punt de control és 6, 15, 17 i 10, respectivament. La taxa de qualitat global expressada en percentatge de peces obtingudes sense defectes és del:`,
+        options: [
+            { text: "95,20 %", value: "a" },
+            { text: "99,25 %", value: "b" },
+            { text: "98,75 %", value: "c" },
+            { text: "94,00 %", value: "d" }
+        ],
+        correctAnswer: "d",
+        //Falta hacer
+        steps: `
+            \\[
+            m = 11 \\, \\text{L} \\times 1000 \\, \\text{g/L} = 11000 \\, \\text{g}
+            \\]
+            \\[
+            \\Delta T = 70 \\, ^\\circ \\text{C} - 10 \\, ^\\circ \\text{C} = 60 \\, ^\\circ \\text{C}
+            \\]
+            \\[
+            Q = m \\times c_e \\times \\Delta T
+            \\]
+            \\[
+            Q = 11000 \\, \\text{g} \\times 4{,}18 \\, \\frac{\\text{J}}{\\text{g} \\cdot ^\\circ \\text{C}} \\times 60 \\, ^\\circ \\text{C}
+            \\]
+            \\[
+            Q = 11000 \\times 4{,}18 \\times 60 = 2{,}7588 \\times 10^6 \\, \\text{J}
+            \\]
+            \\[
+            W = 0{,}9 \\, \\text{kWh} \\times 3600000 \\, \\text{J/kWh} = 3240000 \\, \\text{J}
+            \\]
+            \\[
+            \\eta = \\frac{Q}{W} \\times 100
+            \\]
+            \\[
+            \\eta = \\frac{2{,}7588 \\times 10^6}{3{,}24 \\times 10^6} \\times 100 = 85{,}15 \\, \\%
+            \\]
+            <br><br>
+            <img src="ruta/a/imatgeResposta.jpg" alt="Imatge relacionada amb la resposta">`,  // Imatge opcional al final de la resposta
+        images: `<img src="ruta/a/imatgePregunta.jpg" alt="Imatge relacionada amb la pregunta">`  // Imatge opcional al final de la pregunta
+    },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     {
         type: "exercicis",
         category: "energia",
